@@ -232,100 +232,123 @@
     .cal-cell .g { font-size: 0.56rem; font-weight: 700; color: var(--gold-deep); line-height: 1.2; margin-top: 3px; word-break: break-word; }
     .cal-cell .c { font-size: 0.56rem; font-weight: 700; color: var(--indigo); line-height: 1.2; margin-top: 3px; word-break: break-word; }
 
-    /* ===================== EXPLAINER SECTION ===================== */
-    .explainer-box {
-      text-align: left;
-      line-height: 1.6;
+    /* ---------- Help / "How This Calendar Works" section ---------- */
+    .help-details {
+      width: 90%;
+      max-width: 640px;
+      margin-bottom: 1rem;
     }
-    .explainer-toggle {
+    .help-details summary {
+      cursor: pointer;
+      list-style: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 1px 3px rgba(20,20,40,0.04), 0 6px 16px rgba(20,20,40,0.05);
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      cursor: pointer;
-      list-style: none;
-    }
-    .explainer-toggle::-webkit-details-marker { display: none; }
-    .explainer-toggle .chevron {
-      font-size: 1rem;
-      color: var(--text-tertiary);
-      transition: transform 0.2s ease;
-      flex-shrink: 0;
-      margin-left: 10px;
-    }
-    details[open] .explainer-toggle .chevron { transform: rotate(180deg); }
-    .explainer-body { margin-top: 1rem; }
-    .explainer-sub {
-      background: var(--bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.1rem 1.15rem;
-      margin-bottom: 1rem;
       text-align: left;
     }
-    .explainer-sub:last-child { margin-bottom: 0; }
-    .explainer-sub h3.exp-h2 {
+    .help-details summary::-webkit-details-marker { display: none; }
+    .help-details summary::after {
+      content: '▾';
+      font-family: var(--font);
+      font-weight: 700;
+      color: var(--text-tertiary);
+      transition: transform 0.15s ease;
+      margin-left: 10px;
+    }
+    .help-details[open] summary { border-radius: 14px 14px 0 0; box-shadow: none; border-bottom: 1px solid var(--card-border); }
+    .help-details[open] summary::after { transform: rotate(180deg); }
+    .help-details[open] {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-top: none;
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(20,20,40,0.04), 0 6px 16px rgba(20,20,40,0.05);
+    }
+    .help-content {
+      padding: 0.25rem 1.1rem 1.25rem;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .help-content .box {
+      background: var(--bg);
+      width: auto;
+      max-width: none;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+    .help-content h1 {
       font-family: var(--font-display);
-      font-size: 1.02rem;
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.4rem;
+      text-align: center;
+    }
+    .help-content .subtitle { text-align: center; color: var(--text-secondary); margin: 0 0 1.25rem; font-size: 0.92rem; }
+    .help-content h2 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
       letter-spacing: 0.01em;
       margin: 0 0 0.6rem;
-      color: var(--text-primary);
+      text-align: left;
     }
-    .explainer-sub h4.exp-h3 { font-size: 0.92rem; margin: 1rem 0 0.35rem; color: var(--text-primary); }
-    .explainer-sub p { margin: 0.5rem 0; color: var(--text-secondary); font-size: 0.88rem; text-align: left; }
-    .explainer-sub p.subtitle { text-align: center; }
-    .explainer-sub strong { color: var(--text-primary); }
-    .explainer-sub code {
+    .help-content h3 { font-size: 0.95rem; margin: 1.1rem 0 0.4rem; color: var(--text-primary); }
+    .help-content p { margin: 0.5rem 0; color: var(--text-secondary); font-size: 0.9rem; text-align: left; }
+    .help-content strong { color: var(--text-primary); }
+    .help-content code {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 4px;
       padding: 1px 5px;
       font-size: 0.85em;
     }
-    .explainer-sub table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.8rem; }
-    .explainer-sub th {
+    .help-content table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
+    .help-content th {
       text-align: left;
       background: var(--card-bg);
-      padding: 6px 8px;
+      padding: 7px 9px;
       font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.03em;
       color: var(--text-tertiary);
       border-bottom: 2px solid var(--card-border);
     }
-    .explainer-sub td {
-      padding: 6px 8px;
+    .help-content td {
+      padding: 7px 9px;
       border-bottom: 1px solid var(--card-border);
       color: var(--text-secondary);
     }
-    .explainer-sub td strong { color: var(--text-primary); }
-    .explainer-sub tr:last-child td { border-bottom: none; }
-    .explainer-sub .note {
+    .help-content td strong { color: var(--text-primary); }
+    .help-content tr:last-child td { border-bottom: none; }
+    .help-content .note {
       background: var(--card-bg);
       border-left: 3px solid var(--gold-deep);
       border-radius: 6px;
-      padding: 0.6rem 0.85rem;
+      padding: 0.6rem 0.9rem;
       margin: 0.75rem 0;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
     }
-    .explainer-sub .uncertain {
+    .help-content .uncertain {
       background: var(--card-bg);
       border-left: 3px solid var(--text-tertiary);
       border-radius: 6px;
-      padding: 0.6rem 0.85rem;
+      padding: 0.6rem 0.9rem;
       margin: 0.75rem 0;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
     }
-    .explainer-sub ul { margin: 0.4rem 0; padding-left: 1.2rem; }
-    .explainer-sub li { color: var(--text-secondary); font-size: 0.88rem; margin: 0.2rem 0; }
-    .explainer-sub .grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0.75rem 0; }
-    .explainer-sub .mini {
+    .help-content .grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0.75rem 0; }
+    .help-content .mini {
       border-radius: 10px;
       padding: 10px 8px;
       text-align: center;
@@ -333,10 +356,13 @@
       font-weight: 700;
       font-size: 0.8rem;
     }
-    .explainer-toc { font-size: 0.85rem; text-align: left; }
-    .explainer-toc a { color: var(--gold-deep); text-decoration: none; }
-    .explainer-toc a:hover { text-decoration: underline; }
-    .explainer-toc li { margin-bottom: 4px; }
+    .help-content .toc { font-size: 0.86rem; }
+    .help-content .toc a { color: var(--gold-deep); text-decoration: none; }
+    .help-content .toc a:hover { text-decoration: underline; }
+    .help-content .toc li { margin-bottom: 4px; }
+    @media (min-width: 480px) {
+      .help-content .grid4 { grid-template-columns: repeat(4, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -451,7 +477,7 @@
     </div>
 
     <div style="margin-top: 1.25rem;">
-      <h3 style="margin-bottom: 0.5rem;">Full Solar Day (Sunrise → Sunrise)</h3>
+      <h3 id="dayBarTitle" style="margin-bottom: 0.5rem;">Full Solar Day (Sunrise → Sunrise)</h3>
       <div style="background: #eee; height: 20px; border-radius: 10px; overflow: hidden;">
         <div id="dayBar" style="width: 0%; background: #fbc02d; height: 100%; text-align: right; padding-right: 5px; font-size: 0.8rem; color: #fff; font-weight: 700;">
           <span id="dayPct">0%</span>
@@ -469,10 +495,10 @@
     <div id="gahCards" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
       <div style="flex: 1; min-width: 140px; background: transparent; border: 1px dashed var(--card-border); color: var(--text-tertiary); padding: 8px; border-radius: 10px; font-size: 0.85rem; text-align: center;">
-        <strong>🌌 Prev. Night</strong> (Shab) — starts <span id="prevNightStart">—</span>
+        <strong>🌌 Prev. Night</strong> (Ušahina / Shab) — starts <span id="prevNightStart">—</span>
       </div>
       <div style="flex: 1; min-width: 140px; background: transparent; border: 1px dashed var(--card-border); color: var(--text-tertiary); padding: 8px; border-radius: 10px; font-size: 0.85rem; text-align: center;">
-        <strong>🌅 Next Morning</strong> (Bāmdād) — starts <span id="nextMorningStart">—</span>
+        <strong>🌅 Next Morning</strong> (Hāvana / Bāmdād) — starts <span id="nextMorningStart">—</span>
       </div>
     </div>
     <p style="margin-top: 1rem;">🌎 True Solar Day (Noon → Noon): <span id="totalDayLength">—</span></p>
@@ -495,7 +521,6 @@
       ⌛ <strong>Days Remaining:</strong> <span id="seasonDaysRemaining">—</span> <strong style="color: var(--gold-deep);">(<span id="seasonDaysRemainingPct">—</span>)</strong>
     </p>
 
-    <p class="subtle" id="polarSunriseNote"></p>
 
     <hr style="border: none; border-top: 1px solid var(--card-border); margin: 1.25rem 0;">
 
@@ -518,33 +543,29 @@
     <h2>🗓️ Seasonal Quarters of <span id="seasonsYear">—</span></h2>
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
       <div class="stat-card season" style="background: var(--gold-light);">
-        <div class="title">🌱 Bahār</div>
-        <div class="tag">Nōrūz</div>
-        <div class="tag">Spring Equinox</div>
+        <div class="title">🌱 Vaŋhar (Bahār)</div>
+        <div class="tag">Equinox</div>
         <div>Start: <span id="springStart">—</span></div>
         <div>Length: <span id="springLength">—</span></div>
         <div>Share: <span id="springShare">—</span></div>
       </div>
       <div class="stat-card season" style="background: var(--gold);">
-        <div class="title">☀️ Tābestān</div>
-        <div class="tag">Tīrgān</div>
-        <div class="tag">Summer Solstice</div>
+        <div class="title">☀️ Hama (Tābestān)</div>
+        <div class="tag">Solstice</div>
         <div>Start: <span id="summerStart">—</span></div>
         <div>Length: <span id="summerLength">—</span></div>
         <div>Share: <span id="summerShare">—</span></div>
       </div>
       <div class="stat-card season" style="background: var(--violet);">
-        <div class="title">🍂 Pā'īz</div>
-        <div class="tag">Mihrgān</div>
-        <div class="tag">Autumn Equinox</div>
+        <div class="title">🍂 Paiti-iš (Pā'īz)</div>
+        <div class="tag">Equinox</div>
         <div>Start: <span id="autumnStart">—</span></div>
         <div>Length: <span id="autumnLength">—</span></div>
         <div>Share: <span id="autumnShare">—</span></div>
       </div>
       <div class="stat-card season" style="background: var(--navy);">
-        <div class="title">❄️ Zemestān</div>
-        <div class="tag">Yalda</div>
-        <div class="tag">Winter Solstice</div>
+        <div class="title">❄️ Zima (Zemestān)</div>
+        <div class="tag">Solstice</div>
         <div>Start: <span id="winterStart">—</span></div>
         <div>Length: <span id="winterLength">—</span></div>
         <div>Share: <span id="winterShare">—</span></div>
@@ -590,206 +611,205 @@
     <p class="subtle" id="moonAgeFooter" style="text-align: center; margin-top: 0.75rem;">🕐 Moon Age: — days into the ~29.5 day lunar cycle</p>
   </div>
 
-  <!-- ===================== EXPLAINER (COLLAPSIBLE) ===================== -->
-  <div class="box explainer-box">
-    <details id="explainerDetails">
-      <summary class="explainer-toggle">
-        <h2 style="margin:0;">☉ How This Calendar Works</h2>
-        <span class="chevron">▾</span>
-      </summary>
+  <!-- ===================== HELP / HOW THIS CALENDAR WORKS (collapsible) ===================== -->
+  <details class="help-details">
+    <summary>❓ How This Calendar Works</summary>
+    <div class="help-content">
 
-      <div class="explainer-body">
-        <p class="subtitle" style="margin-top:-0.3rem;">A reference for the Persian Zoroastrian Solar Calendar — Avestan-primary edition.</p>
-        <div class="explainer-toc">
+      <div class="box">
+        <h1>☉ How This Calendar Works</h1>
+        <p class="subtitle">A reference for the Persian Zoroastrian Solar Calendar — Avestan-primary edition.</p>
+        <div class="toc">
           <ol>
-            <li><a href="#exp-overview">Overview</a></li>
-            <li><a href="#exp-months">The 12×30 month structure &amp; the 5 Gāthā days</a></li>
-            <li><a href="#exp-daynames">The 30 day-names (Rōz)</a></li>
-            <li><a href="#exp-gahs">The 5 Gāhs</a></li>
-            <li><a href="#exp-gahambars">The 6 Gāhambārs</a></li>
-            <li><a href="#exp-jashns">The 12 monthly Jashns</a></li>
-            <li><a href="#exp-cardinals">The 4 cardinal points of the year</a></li>
-            <li><a href="#exp-astro">Astronomical methodology</a></li>
-            <li><a href="#exp-poles">Behavior at extreme latitudes</a></li>
+            <li><a href="#help-overview">Overview</a></li>
+            <li><a href="#help-months">The 12×30 month structure &amp; the 5 Gāthā days</a></li>
+            <li><a href="#help-daynames">The 30 day-names (Rōz)</a></li>
+            <li><a href="#help-gahs">The 5 Gāhs</a></li>
+            <li><a href="#help-gahambars">The 6 Gāhambārs</a></li>
+            <li><a href="#help-jashns">The 12 monthly Jashns</a></li>
+            <li><a href="#help-cardinals">The 4 cardinal points of the year</a></li>
+            <li><a href="#help-astro">Astronomical methodology</a></li>
+            <li><a href="#help-poles">Behavior at extreme latitudes</a></li>
           </ol>
         </div>
+      </div>
 
-        <div class="explainer-sub" id="exp-overview">
-          <h3 class="exp-h2">1. Overview</h3>
-          <p>Every date and boundary in this app is computed from the Sun's actual position for your coordinates: equinox and solstice timing, sunrise, solar noon, sunset, and solar midnight. The day, the month, and the year each track a different layer of that motion.</p>
-          <p><strong>The day</strong> divides into 5 Gāhs, bounded by sunrise, solar noon, sunset, and solar midnight.</p>
-          <p><strong>The month</strong> is 30 days, and each of those 30 days has its own individual name (Rōz), cycling identically in every month.</p>
-          <p><strong>The year</strong> is 12 such months (360 days) plus 5 intercalary Gāthā days, anchored to Nowruz — the vernal equinox.</p>
+      <div class="box" id="help-overview">
+        <h2>1. Overview</h2>
+        <p>Every date and boundary in this app is computed from the Sun's actual position for your coordinates: equinox and solstice timing, sunrise, solar noon, sunset, and solar midnight. The day, the month, and the year each track a different layer of that motion.</p>
+        <p><strong>The day</strong> divides into 5 Gāhs, bounded by sunrise, solar noon, sunset, and solar midnight.</p>
+        <p><strong>The month</strong> is 30 days, and each of those 30 days has its own individual name (Rōz), cycling identically in every month.</p>
+        <p><strong>The year</strong> is 12 such months (360 days) plus 5 intercalary Gāthā days, anchored to Nowruz — the vernal equinox.</p>
+      </div>
+
+      <div class="box" id="help-months">
+        <h2>2. The 12×30 Month Structure</h2>
+        <p>Twelve months of exactly 30 days each total 360 days. The remaining 5 days needed for a 365-day solar year form the <strong>Gāthā days</strong>, a short block right before the next Nowruz. They don't belong to any of the 12 months.</p>
+        <table>
+          <tr><th>#</th><th>Month</th><th>#</th><th>Month</th></tr>
+          <tr><td>1</td><td>Farvardin</td><td>7</td><td>Mihr</td></tr>
+          <tr><td>2</td><td>Ordibehesht</td><td>8</td><td>Aban</td></tr>
+          <tr><td>3</td><td>Khordad</td><td>9</td><td>Adar</td></tr>
+          <tr><td>4</td><td>Tir</td><td>10</td><td>Dey</td></tr>
+          <tr><td>5</td><td>Amordad</td><td>11</td><td>Bahman</td></tr>
+          <tr><td>6</td><td>Shahrevar</td><td>12</td><td>Esfand</td></tr>
+        </table>
+        <p>Each day begins at sunrise, so a calendar day spans two Gregorian dates — the app labels this as a range, e.g. <code>Mar 20-21</code>. The exact range shifts slightly year to year and by location, since it's found by walking sunrise-to-sunrise from the Nowruz anchor rather than by a fixed offset.</p>
+        <div class="note">
+          <strong>There's no persistent "year number."</strong> The app never stores or increments a year count. Each time it needs today's date, it finds the equinox that starts the current cycle and treats that as Nowruz. So the calendar is a repeating 365-day cycle keyed to real astronomy, not an accumulating count from some epoch. A festival defined as "day 41 of the year" (Ordibehesht 11) always lands correctly every cycle, because it's counted forward from whichever Nowruz was just found.
         </div>
-
-        <div class="explainer-sub" id="exp-months">
-          <h3 class="exp-h2">2. The 12×30 Month Structure</h3>
-          <p>Twelve months of exactly 30 days each total 360 days. The remaining 5 days needed for a 365-day solar year form the <strong>Gāthā days</strong>, a short block right before the next Nowruz. They don't belong to any of the 12 months.</p>
-          <table>
-            <tr><th>#</th><th>Month</th><th>#</th><th>Month</th></tr>
-            <tr><td>1</td><td>Farvardin</td><td>7</td><td>Mihr</td></tr>
-            <tr><td>2</td><td>Ordibehesht</td><td>8</td><td>Aban</td></tr>
-            <tr><td>3</td><td>Khordad</td><td>9</td><td>Adar</td></tr>
-            <tr><td>4</td><td>Tir</td><td>10</td><td>Dey</td></tr>
-            <tr><td>5</td><td>Amordad</td><td>11</td><td>Bahman</td></tr>
-            <tr><td>6</td><td>Shahrevar</td><td>12</td><td>Esfand</td></tr>
-          </table>
-          <p>Each day begins at sunrise, so a calendar day spans two Gregorian dates — the app labels this as a range, e.g. <code>Mar 20-21</code>. The exact range shifts slightly year to year and by location, since it's found by walking sunrise-to-sunrise from the Nowruz anchor rather than by a fixed offset.</p>
-          <div class="note">
-            <strong>There's no persistent "year number."</strong> The app never stores or increments a year count. Each time it needs today's date, it finds the equinox that starts the current cycle and treats that as Nowruz. So the calendar is a repeating 365-day cycle keyed to real astronomy, not an accumulating count from some epoch. A festival defined as "day 41 of the year" (Ordibehesht 11) always lands correctly every cycle, because it's counted forward from whichever Nowruz was just found.
-          </div>
-          <div class="note">
-            <strong>Nowruz uses the local spring equinox</strong> — the March equinox in the Northern Hemisphere, the September equinox in the Southern Hemisphere. A location's Nowruz is always the equinox that starts its own local spring, not a fixed calendar date shared globally.
-          </div>
-          <div class="note">
-            <strong>Day 1 doesn't always start on the same calendar date as the equinox.</strong> The equinox is a single global instant; whether that instant falls before or after a given location's sunrise that day depends entirely on the location's longitude. If the equinox happens after the day's sunrise has already passed, Day 1 rolls forward to the next sunrise instead. For the March 2026 equinox (14:45:30 UTC):
-            <ul>
-              <li>Mexico City — equinox at 8:45 AM local, after that day's sunrise (6:41 AM) → Day 1 starts the <em>following</em> morning.</li>
-              <li>Honolulu — equinox at 4:45 AM local, before that day's sunrise (6:36 AM) → Day 1 starts that <em>same</em> morning.</li>
-            </ul>
-            The two locations end up exactly one day apart in the calendar from that point on, for the entire year. This applies everywhere the app anchors to Nowruz — the date engine, the Monthly Calendar's Gregorian labels, and the Current Solar Year box's "Year started" figure all reflect the real per-location Day 1, not the raw equinox instant.
-          </div>
+        <div class="note">
+          <strong>Nowruz uses the local spring equinox</strong> — the March equinox in the Northern Hemisphere, the September equinox in the Southern Hemisphere. A location's Nowruz is always the equinox that starts its own local spring, not a fixed calendar date shared globally.
         </div>
-
-        <div class="explainer-sub" id="exp-daynames">
-          <h3 class="exp-h2">3. The 30 Day-Names (Rōz)</h3>
-          <p>Each day of every month is dedicated to one of the Yazatas, in a fixed 30-name cycle repeating identically in every month.</p>
-          <table>
-            <tr><th>#</th><th>Base Avestan Name</th><th>New Persian</th></tr>
-            <tr><td>1</td><td>Ahura Mazda</td><td>Hormazd</td></tr>
-            <tr><td>2</td><td>Vohu Manah</td><td>Bahman</td></tr>
-            <tr><td>3</td><td>Aša Vahišta</td><td>Ordibehesht</td></tr>
-            <tr><td>4</td><td>Xšaθra Vairya</td><td>Shahrevar</td></tr>
-            <tr><td>5</td><td>Spenta Ārmaiti</td><td>Esfand</td></tr>
-            <tr><td>6</td><td>Haurvatāt</td><td>Khordad</td></tr>
-            <tr><td>7</td><td>Ameretāt</td><td>Amordad</td></tr>
-            <tr><td>8</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Adar</td></tr>
-            <tr><td>9</td><td>Ātar</td><td>Azar / Adar</td></tr>
-            <tr><td>10</td><td>Ap</td><td>Aban</td></tr>
-            <tr><td>11</td><td>Hvare-xšaēta</td><td>Khorshed</td></tr>
-            <tr><td>12</td><td>Māh</td><td>Mah</td></tr>
-            <tr><td>13</td><td>Tištrya</td><td>Tir</td></tr>
-            <tr><td>14</td><td>Geuš Urvan</td><td>Gosh</td></tr>
-            <tr><td>15</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Mihr</td></tr>
-            <tr><td>16</td><td>Mithra</td><td>Mihr / Mehr</td></tr>
-            <tr><td>17</td><td>Sraōša</td><td>Soroush</td></tr>
-            <tr><td>18</td><td>Rašnu</td><td>Rashn</td></tr>
-            <tr><td>19</td><td>Fravaši</td><td>Farvardin</td></tr>
-            <tr><td>20</td><td>Vərəθraγna</td><td>Bahram</td></tr>
-            <tr><td>21</td><td>Rāman</td><td>Ram</td></tr>
-            <tr><td>22</td><td>Vāta</td><td>Bad / Vad</td></tr>
-            <tr><td>23</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Din</td></tr>
-            <tr><td>24</td><td>Daēnā</td><td>Din</td></tr>
-            <tr><td>25</td><td>Aši</td><td>Ard / Ashi</td></tr>
-            <tr><td>26</td><td>Arštāt</td><td>Ashtad</td></tr>
-            <tr><td>27</td><td>Asman</td><td>Asman</td></tr>
-            <tr><td>28</td><td>Zam</td><td>Zamyad</td></tr>
-            <tr><td>29</td><td>Mąθra Spenta</td><td>Mahraspand</td></tr>
-            <tr><td>30</td><td>Anaghra Raōčah</td><td>Aneran</td></tr>
-          </table>
-          <p>Days 8, 15, and 23 are all dedicated to Datuš Ahura Mazda ("Creator") and disambiguated in Persian by which later day each precedes: Dey-ba-Adar, Dey-ba-Mihr, Dey-ba-Din.</p>
-          <div class="uncertain">
-            A note on scope: this system has no established grouping of these 30 day-names into week-like units — that's not covered here, since it isn't something the app implements or something I can confirm as a documented historical practice.
-          </div>
-        </div>
-
-        <div class="explainer-sub" id="exp-gahs">
-          <h3 class="exp-h2">4. The 5 Gāhs</h3>
-          <p>The day divides into 5 periods bounded by real solar events at your location. Pasin's start is fixed at a set point on the app's degree scale (120°) rather than tracking a named astronomical event; the other four boundaries all track a real event directly.</p>
-          <table>
-            <tr><th>Avestan</th><th>Persian</th><th>Astronomical Event</th><th>Span</th></tr>
-            <tr><td>Hāvana</td><td>Bāmdād</td><td>Sunrise → Solar Noon</td><td>Begins the instant the sun's upper limb crosses the eastern horizon; ends at solar meridian transit.</td></tr>
-            <tr><td>Rapiθvina</td><td>Nimruz</td><td>Solar Noon → Pasin's start</td><td>Begins exactly at solar noon, extending a short way into early afternoon.</td></tr>
-            <tr><td>Uzayeirina</td><td>Pasin</td><td>Fixed start → Sunset</td><td>Afternoon decline, ending the instant the sun's disk drops below the western horizon.</td></tr>
-            <tr><td>Aiwisrūθrima</td><td>Sham</td><td>Sunset → Solar Midnight</td><td>Dusk through the twilight stages to solar midnight (nadir).</td></tr>
-            <tr><td>Ušahina</td><td>Shab</td><td>Solar Midnight → next Sunrise</td><td>From the nadir through pre-dawn to the next sunrise.</td></tr>
-          </table>
-          <div class="note">
-            <strong>Rapiθvina is suspended for 5 months a year</strong>, centered on the local winter solstice. During that window, Hāvana (Bāmdād) extends from 0°–90° to 0°–120°, covering Rapiθvina's slot. Pasin is unaffected either way — always 120°–180°.
-          </div>
-        </div>
-
-        <div class="explainer-sub" id="exp-gahambars">
-          <h3 class="exp-h2">5. The 6 Gāhambārs</h3>
-          <table>
-            <tr><th>Avestan</th><th>Persian</th><th>Meaning</th><th>Date</th></tr>
-            <tr><td>Maidyō-zarmya</td><td>Miyān Bahār</td><td>Mid-Spring</td><td>Ordibehesht 11</td></tr>
-            <tr><td>Maidyō-šama</td><td>Miyān Tābestān</td><td>Mid-Summer</td><td>Tir 11</td></tr>
-            <tr><td>Paiti-ša-hāmya</td><td>Pāyān Tābestān</td><td>End of Summer</td><td>Shahrivar 26</td></tr>
-            <tr><td>Aya-θrima</td><td>Miyān Pā'īz</td><td>Mid-Autumn</td><td>Mehr 26</td></tr>
-            <tr><td>Maidyō-yārya</td><td>Miyān Zemestān</td><td>Mid-Winter</td><td>Dey 11</td></tr>
-            <tr><td>Hama-spas-maidaya</td><td>Pāyān Sāl</td><td>End of Year</td><td>Esfand 26</td></tr>
-          </table>
-        </div>
-
-        <div class="explainer-sub" id="exp-jashns">
-          <h3 class="exp-h2">6. The 12 Monthly Jashns</h3>
-          <p>A Jashn falls whenever the day's name matches the month's own name — since each of the 12 months is itself named after one of the 30 day-Yazatas, this happens once per month, except Dey.</p>
-          <table>
-            <tr><th>Jashn</th><th>Falls on</th></tr>
-            <tr><td>Farvardingān</td><td>Farvardin 19</td></tr>
-            <tr><td>Ordībeheštgān</td><td>Ordibehesht 3</td></tr>
-            <tr><td>Khordādgān</td><td>Khordad 6</td></tr>
-            <tr><td>Tīrgān</td><td>Tir 13</td></tr>
-            <tr><td>Amordādgān</td><td>Amordad 7</td></tr>
-            <tr><td>Šahrevaragān</td><td>Shahrevar 4</td></tr>
-            <tr><td>Mihrgān</td><td>Mihr 16</td></tr>
-            <tr><td>Ābāngān</td><td>Aban 10</td></tr>
-            <tr><td>Ādargān</td><td>Adar 9</td></tr>
-            <tr><td>Deygān</td><td>Dey 1, 8, 15 &amp; 23</td></tr>
-            <tr><td>Bahmangān</td><td>Bahman 2</td></tr>
-            <tr><td>Esfandgān</td><td>Esfand 5</td></tr>
-          </table>
-          <p>Dey gets four instead of one: "Dey" means "Creator," and days 8, 15, and 23 are also all dedicated to the Creator (Datuš Ahura Mazda). So within the month of Dey, the day-name matches the month's meaning four times — day 1 (the month's own start) plus days 8, 15, and 23.</p>
-        </div>
-
-        <div class="explainer-sub" id="exp-cardinals">
-          <h3 class="exp-h2">7. The 4 Cardinal Points of the Year</h3>
-          <p>The fixed astronomical anchors that define where each quarter begins — always the March/June/September/December equinox or solstice, regardless of hemisphere.</p>
-          <div class="grid4">
-            <div class="mini" style="background: var(--gold-light);">Nōrūz<br><span style="font-weight:600; font-size:0.72rem;">Spring Equinox</span></div>
-            <div class="mini" style="background: var(--gold);">Tīrgān<br><span style="font-weight:600; font-size:0.72rem;">Summer Solstice</span></div>
-            <div class="mini" style="background: var(--violet);">Mihrgān<br><span style="font-weight:600; font-size:0.72rem;">Autumn Equinox</span></div>
-            <div class="mini" style="background: var(--navy);">Yalda<br><span style="font-weight:600; font-size:0.72rem;">Winter Solstice</span></div>
-          </div>
-          <p>Nōrūz is Farvardin 1. The four seasons are Bahār, Tābestān, Pā'īz, and Zemestān.</p>
-          <div class="uncertain">
-            "Tīrgān" and "Mihrgān" here name the solstice/equinox instant itself. Those same names also belong to two of the 12 monthly Jashns above (Tīrgān on Tir 13, Mihrgān on Mihr 16) — the app treats these as two separate things sharing a name, not one continuous multi-day event bridging the solstice/equinox to the Jashn date. I don't have a confirmed source for a traditional celebration window spanning that gap, so I'm not asserting one here.
-          </div>
-        </div>
-
-        <div class="explainer-sub" id="exp-astro">
-          <h3 class="exp-h2">8. Astronomical Methodology</h3>
-          <h4 class="exp-h3">Equinoxes &amp; Solstices</h4>
-          <p>Computed to sub-minute precision for the actual year in question, not read from a fixed calendar date — Nowruz can fall anywhere from roughly March 19–21 depending on the year.</p>
-          <h4 class="exp-h3">Sunrise, Solar Noon, Sunset, Solar Midnight</h4>
-          <p>Computed for your exact latitude and longitude each day.</p>
-          <h4 class="exp-h3">Two "day length" figures</h4>
-          <p>The app tracks two distinct measurements:</p>
+        <div class="note">
+          <strong>Day 1 doesn't always start on the same calendar date as the equinox.</strong> The equinox is a single global instant; whether that instant falls before or after a given location's sunrise that day depends entirely on the location's longitude. If the equinox happens after the day's sunrise has already passed, Day 1 rolls forward to the next sunrise instead. For the March 2026 equinox (14:45:30 UTC):
           <ul>
-            <li><strong>True Solar Day</strong> (noon → next noon) — varies roughly 24h ± 30 seconds across the year, due to Earth's elliptical orbit and axial tilt.</li>
-            <li><strong>Sunrise-to-sunrise</strong> — used because the Gāh cycle and the calendar day both begin at dawn. This wobbles further from 24 hours than the noon figure because it's also affected by latitude.</li>
+            <li>Mexico City — equinox at 8:45 AM local, after that day's sunrise (6:41 AM) → Day 1 starts the <em>following</em> morning.</li>
+            <li>Honolulu — equinox at 4:45 AM local, before that day's sunrise (6:36 AM) → Day 1 starts that <em>same</em> morning.</li>
           </ul>
-          <h4 class="exp-h3">The Moon</h4>
-          <p>Phase, illumination, distance, rise/transit/set, and angular diameter are all computed live from lunar ephemeris. The angular diameter is calculated internally (used in the supermoon/micromoon threshold checks) but isn't currently displayed as its own figure in the interface. The moon-phase icon is rendered from a numerically sampled terminator curve rather than a set of pre-drawn phase images.</p>
-        </div>
-
-        <div class="explainer-sub" id="exp-poles">
-          <h3 class="exp-h2">9. Behavior at Extreme Latitudes</h3>
-          <p>Above roughly 66.5° latitude, there are days each year with no sunrise or sunset — Midnight Sun or Polar Night. Solar noon and solar midnight (nadir) stay defined in both cases, since they only depend on the sun's meridian transit, not on the horizon. At the exact geometric pole (90.000°), longitude itself is undefined and the sun's altitude barely changes across a full rotation — but solar noon and solar midnight remain distinct, calculable moments in that rotation, so the Gāh can still be resolved from them.</p>
-          <table>
-            <tr><th>State</th><th>Active Gāh</th></tr>
-            <tr><td>Polar Night (sun never rises)</td><td>Ušahina (Shab), for one full nadir-to-nadir cycle</td></tr>
-            <tr><td>Midnight Sun, nadir → solar noon</td><td>Hāvana (Bāmdād)</td></tr>
-            <tr><td>Midnight Sun, solar noon → next nadir</td><td>Rapiθvina (Nimruz), extended — there's no sunset to hand off to Uzayeirina</td></tr>
-          </table>
-          <p>The Active Gāh progress bar, and the Gāh Sectors cards, use these same nadir/noon windows to show real elapsed and remaining time — not placeholder text. The Full Solar Day bar retitles itself to "Noon → Noon" and tracks that cycle instead of sunrise-to-sunrise, since sunrise doesn't happen. The Sunrise/Sunset entries are left out of the daily event list rather than shown blank; Solar Noon and Solar Midnight are shown as usual. The Monthly Calendar's Gregorian date labels fall back to a fixed day boundary so they keep displaying even without a sunrise to anchor them.</p>
-          <p>During Midnight Sun the dial switches to tracking live solar azimuth around a full 360° ring rather than a horizon-anchored wheel, since there's no sunrise/sunset pair to anchor it to.</p>
-          <p>Everything not tied to sunrise/sunset — Current Season, Current Solar Year, the Zoroastrian calendar date, equinox and solstice timing — is unaffected at any latitude, poles included, since none of it depends on the observer's horizon.</p>
+          The two locations end up exactly one day apart in the calendar from that point on, for the entire year. This applies everywhere the app anchors to Nowruz — the date engine, the Monthly Calendar's Gregorian labels, and the Current Solar Year box's "Year started" figure all reflect the real per-location Day 1, not the raw equinox instant.
         </div>
       </div>
-    </details>
-  </div>
+
+      <div class="box" id="help-daynames">
+        <h2>3. The 30 Day-Names (Rōz)</h2>
+        <p>Each day of every month is dedicated to one of the Yazatas, in a fixed 30-name cycle repeating identically in every month.</p>
+        <table>
+          <tr><th>#</th><th>Base Avestan Name</th><th>New Persian</th></tr>
+          <tr><td>1</td><td>Ahura Mazda</td><td>Hormazd</td></tr>
+          <tr><td>2</td><td>Vohu Manah</td><td>Bahman</td></tr>
+          <tr><td>3</td><td>Aša Vahišta</td><td>Ordibehesht</td></tr>
+          <tr><td>4</td><td>Xšaθra Vairya</td><td>Shahrevar</td></tr>
+          <tr><td>5</td><td>Spenta Ārmaiti</td><td>Esfand</td></tr>
+          <tr><td>6</td><td>Haurvatāt</td><td>Khordad</td></tr>
+          <tr><td>7</td><td>Ameretāt</td><td>Amordad</td></tr>
+          <tr><td>8</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Adar</td></tr>
+          <tr><td>9</td><td>Ātar</td><td>Azar / Adar</td></tr>
+          <tr><td>10</td><td>Ap</td><td>Aban</td></tr>
+          <tr><td>11</td><td>Hvare-xšaēta</td><td>Khorshed</td></tr>
+          <tr><td>12</td><td>Māh</td><td>Mah</td></tr>
+          <tr><td>13</td><td>Tištrya</td><td>Tir</td></tr>
+          <tr><td>14</td><td>Geuš Urvan</td><td>Gosh</td></tr>
+          <tr><td>15</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Mihr</td></tr>
+          <tr><td>16</td><td>Mithra</td><td>Mihr / Mehr</td></tr>
+          <tr><td>17</td><td>Sraōša</td><td>Soroush</td></tr>
+          <tr><td>18</td><td>Rašnu</td><td>Rashn</td></tr>
+          <tr><td>19</td><td>Fravaši</td><td>Farvardin</td></tr>
+          <tr><td>20</td><td>Vərəθraγna</td><td>Bahram</td></tr>
+          <tr><td>21</td><td>Rāman</td><td>Ram</td></tr>
+          <tr><td>22</td><td>Vāta</td><td>Bad / Vad</td></tr>
+          <tr><td>23</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Din</td></tr>
+          <tr><td>24</td><td>Daēnā</td><td>Din</td></tr>
+          <tr><td>25</td><td>Aši</td><td>Ard / Ashi</td></tr>
+          <tr><td>26</td><td>Arštāt</td><td>Ashtad</td></tr>
+          <tr><td>27</td><td>Asman</td><td>Asman</td></tr>
+          <tr><td>28</td><td>Zam</td><td>Zamyad</td></tr>
+          <tr><td>29</td><td>Mąθra Spenta</td><td>Mahraspand</td></tr>
+          <tr><td>30</td><td>Anaghra Raōčah</td><td>Aneran</td></tr>
+        </table>
+        <p>Days 8, 15, and 23 are all dedicated to Datuš Ahura Mazda ("Creator") and disambiguated in Persian by which later day each precedes: Dey-ba-Adar, Dey-ba-Mihr, Dey-ba-Din.</p>
+        <div class="uncertain">
+          A note on scope: this system has no established grouping of these 30 day-names into week-like units — that's not covered here, since it isn't something the app implements or something I can confirm as a documented historical practice.
+        </div>
+      </div>
+
+      <div class="box" id="help-gahs">
+        <h2>4. The 5 Gāhs</h2>
+        <p>The day divides into 5 periods bounded by real solar events at your location. Pasin's start is fixed at a set point on the app's degree scale (120°) rather than tracking a named astronomical event; the other four boundaries all track a real event directly.</p>
+        <table>
+          <tr><th>Avestan</th><th>Persian</th><th>Astronomical Event</th><th>Span</th></tr>
+          <tr><td>Hāvana</td><td>Bāmdād</td><td>Sunrise → Solar Noon</td><td>Begins the instant the sun's upper limb crosses the eastern horizon; ends at solar meridian transit.</td></tr>
+          <tr><td>Rapiθvina</td><td>Nimruz</td><td>Solar Noon → Pasin's start</td><td>Begins exactly at solar noon, extending a short way into early afternoon.</td></tr>
+          <tr><td>Uzayeirina</td><td>Pasin</td><td>Fixed start → Sunset</td><td>Afternoon decline, ending the instant the sun's disk drops below the western horizon.</td></tr>
+          <tr><td>Aiwisrūθrima</td><td>Sham</td><td>Sunset → Solar Midnight</td><td>Dusk through the twilight stages to solar midnight (nadir).</td></tr>
+          <tr><td>Ušahina</td><td>Shab</td><td>Solar Midnight → next Sunrise</td><td>From the nadir through pre-dawn to the next sunrise.</td></tr>
+        </table>
+        <div class="note">
+          <strong>Rapiθvina is suspended for 5 months a year</strong>, centered on the local winter solstice. During that window, Hāvana (Bāmdād) extends from 0°–90° to 0°–120°, covering Rapiθvina's slot. Pasin is unaffected either way — always 120°–180°.
+        </div>
+      </div>
+
+      <div class="box" id="help-gahambars">
+        <h2>5. The 6 Gāhambārs</h2>
+        <table>
+          <tr><th>Avestan</th><th>Persian</th><th>Meaning</th><th>Date</th></tr>
+          <tr><td>Maidyō-zarmya</td><td>Miyān Bahār</td><td>Mid-Spring</td><td>Ordibehesht 11</td></tr>
+          <tr><td>Maidyō-šama</td><td>Miyān Tābestān</td><td>Mid-Summer</td><td>Tir 11</td></tr>
+          <tr><td>Paiti-ša-hāmya</td><td>Pāyān Tābestān</td><td>End of Summer</td><td>Shahrivar 26</td></tr>
+          <tr><td>Aya-θrima</td><td>Miyān Pā'īz</td><td>Mid-Autumn</td><td>Mehr 26</td></tr>
+          <tr><td>Maidyō-yārya</td><td>Miyān Zemestān</td><td>Mid-Winter</td><td>Dey 11</td></tr>
+          <tr><td>Hama-spas-maidaya</td><td>Pāyān Sāl</td><td>End of Year</td><td>Esfand 26</td></tr>
+        </table>
+      </div>
+
+      <div class="box" id="help-jashns">
+        <h2>6. The 12 Monthly Jashns</h2>
+        <p>A Jashn falls whenever the day's name matches the month's own name — since each of the 12 months is itself named after one of the 30 day-Yazatas, this happens once per month, except Dey.</p>
+        <table>
+          <tr><th>Jashn</th><th>Falls on</th></tr>
+          <tr><td>Farvardingān</td><td>Farvardin 19</td></tr>
+          <tr><td>Ordībeheštgān</td><td>Ordibehesht 3</td></tr>
+          <tr><td>Khordādgān</td><td>Khordad 6</td></tr>
+          <tr><td>Tīrgān</td><td>Tir 13</td></tr>
+          <tr><td>Amordādgān</td><td>Amordad 7</td></tr>
+          <tr><td>Šahrevaragān</td><td>Shahrevar 4</td></tr>
+          <tr><td>Mihrgān</td><td>Mihr 16</td></tr>
+          <tr><td>Ābāngān</td><td>Aban 10</td></tr>
+          <tr><td>Ādargān</td><td>Adar 9</td></tr>
+          <tr><td>Deygān</td><td>Dey 1, 8, 15 &amp; 23</td></tr>
+          <tr><td>Bahmangān</td><td>Bahman 2</td></tr>
+          <tr><td>Esfandgān</td><td>Esfand 5</td></tr>
+        </table>
+        <p>Dey gets four instead of one: "Dey" means "Creator," and days 8, 15, and 23 are also all dedicated to the Creator (Datuš Ahura Mazda). So within the month of Dey, the day-name matches the month's meaning four times — day 1 (the month's own start) plus days 8, 15, and 23.</p>
+      </div>
+
+      <div class="box" id="help-cardinals">
+        <h2>7. The 4 Cardinal Points of the Year</h2>
+        <p>The fixed astronomical anchors that define where each quarter begins — always the March/June/September/December equinox or solstice, regardless of hemisphere.</p>
+        <div class="grid4">
+          <div class="mini" style="background: var(--gold-light);">Nōrūz<br><span style="font-weight:600; font-size:0.75rem;">Spring Equinox</span></div>
+          <div class="mini" style="background: var(--gold);">Tīrgān<br><span style="font-weight:600; font-size:0.75rem;">Summer Solstice</span></div>
+          <div class="mini" style="background: var(--violet);">Mihrgān<br><span style="font-weight:600; font-size:0.75rem;">Autumn Equinox</span></div>
+          <div class="mini" style="background: var(--navy);">Yalda<br><span style="font-weight:600; font-size:0.75rem;">Winter Solstice</span></div>
+        </div>
+        <p>Nōrūz is Farvardin 1. The four seasons are Bahār, Tābestān, Pā'īz, and Zemestān.</p>
+        <div class="uncertain">
+          "Tīrgān" and "Mihrgān" here name the solstice/equinox instant itself. Those same names also belong to two of the 12 monthly Jashns above (Tīrgān on Tir 13, Mihrgān on Mihr 16) — the app treats these as two separate things sharing a name, not one continuous multi-day event bridging the solstice/equinox to the Jashn date. I don't have a confirmed source for a traditional celebration window spanning that gap, so I'm not asserting one here.
+        </div>
+      </div>
+
+      <div class="box" id="help-astro">
+        <h2>8. Astronomical Methodology</h2>
+        <h3>Equinoxes &amp; Solstices</h3>
+        <p>Computed to sub-minute precision for the actual year in question, not read from a fixed calendar date — Nowruz can fall anywhere from roughly March 19–21 depending on the year.</p>
+        <h3>Sunrise, Solar Noon, Sunset, Solar Midnight</h3>
+        <p>Computed for your exact latitude and longitude each day.</p>
+        <h3>Two "day length" figures</h3>
+        <p>The app tracks two distinct measurements:</p>
+        <ul>
+          <li><strong>True Solar Day</strong> (noon → next noon) — varies roughly 24h ± 30 seconds across the year, due to Earth's elliptical orbit and axial tilt.</li>
+          <li><strong>Sunrise-to-sunrise</strong> — used because the Gāh cycle and the calendar day both begin at dawn. This wobbles further from 24 hours than the noon figure because it's also affected by latitude.</li>
+        </ul>
+        <h3>The Moon</h3>
+        <p>Phase, illumination, distance, rise/transit/set, and angular diameter are all computed live from lunar ephemeris. The angular diameter is calculated internally (used in the supermoon/micromoon threshold checks) but isn't currently displayed as its own figure in the interface. The moon-phase icon is rendered from a numerically sampled terminator curve rather than a set of pre-drawn phase images.</p>
+      </div>
+
+      <div class="box" id="help-poles">
+        <h2>9. Behavior at Extreme Latitudes</h2>
+        <p>Above roughly 66.5° latitude, there are days each year with no sunrise or sunset — Midnight Sun or Polar Night. Solar noon and solar midnight (nadir) stay defined in both cases, since they only depend on the sun's meridian transit, not on the horizon. At the exact geometric pole (90.000°), longitude itself is undefined and the sun's altitude barely changes across a full rotation — but solar noon and solar midnight remain distinct, calculable moments in that rotation, so the Gāh can still be resolved from them.</p>
+        <table>
+          <tr><th>State</th><th>Active Gāh</th></tr>
+          <tr><td>Polar Night (sun never rises)</td><td>Ušahina (Shab), for one full nadir-to-nadir cycle</td></tr>
+          <tr><td>Midnight Sun, nadir → solar noon</td><td>Hāvana (Bāmdād)</td></tr>
+          <tr><td>Midnight Sun, solar noon → next nadir</td><td>Rapiθvina (Nimruz), extended — there's no sunset to hand off to Uzayeirina</td></tr>
+        </table>
+        <p>The Active Gāh progress bar, and the Gāh Sectors cards, use these same nadir/noon windows to show real elapsed and remaining time — not placeholder text. The Full Solar Day bar retitles itself to "Noon → Noon" and tracks that cycle instead of sunrise-to-sunrise, since sunrise doesn't happen. The Sunrise/Sunset entries are left out of the daily event list rather than shown blank; Solar Noon and Solar Midnight are shown as usual. The Monthly Calendar's Gregorian date labels fall back to a fixed day boundary so they keep displaying even without a sunrise to anchor them.</p>
+        <p>During Midnight Sun the dial switches to tracking live solar azimuth around a full 360° ring rather than a horizon-anchored wheel, since there's no sunrise/sunset pair to anchor it to.</p>
+        <p>Everything not tied to sunrise/sunset — Current Season, Current Solar Year, the Zoroastrian calendar date, equinox and solstice timing — is unaffected at any latitude, poles included, since none of it depends on the observer's horizon.</p>
+      </div>
+
+    </div>
+  </details>
 
 <script>
 /* ============================================================
@@ -978,19 +998,19 @@ function toScreenAngle(solarDeg) {
 function getGahDefs(rapithwinActive) {
   if (rapithwinActive) {
     return [
-      { key: 'havan', persian: 'Bāmdād', icon: '🌅', start: 0, end: 90, color: 'var(--gold-light)' },
-      { key: 'rapithwin', persian: 'Nimruz', icon: '🔆', start: 90, end: 120, color: 'var(--rapithwin)' },
-      { key: 'uzayeirin', persian: 'Pasin', icon: '☀️', start: 120, end: 180, color: 'var(--gold)' },
-      { key: 'aiwisruthrem', persian: 'Shām', icon: '🌇', start: 180, end: 270, color: 'var(--violet)' },
-      { key: 'ushahin', persian: 'Shab', icon: '🌌', start: 270, end: 360, color: 'var(--navy)' },
+      { key: 'havan', avestan: 'Hāvana', persian: 'Bāmdād', icon: '🌅', start: 0, end: 90, color: 'var(--gold-light)' },
+      { key: 'rapithwin', avestan: 'Rapiθvina', persian: 'Nimruz', icon: '🔆', start: 90, end: 120, color: 'var(--rapithwin)' },
+      { key: 'uzayeirin', avestan: 'Uzayeirina', persian: 'Pasin', icon: '☀️', start: 120, end: 180, color: 'var(--gold)' },
+      { key: 'aiwisruthrem', avestan: 'Aiwisrūθrima', persian: 'Sham', icon: '🌇', start: 180, end: 270, color: 'var(--violet)' },
+      { key: 'ushahin', avestan: 'Ušahina', persian: 'Shab', icon: '🌌', start: 270, end: 360, color: 'var(--navy)' },
     ];
   }
   return [
-    { key: 'havan', persian: 'Bāmdād', icon: '🌅', start: 0, end: 120, color: 'var(--gold-light)' },
-    { key: 'rapithwin', persian: 'Nimruz', icon: '🔆', start: null, end: null, color: 'var(--rapithwin)', dormant: true },
-    { key: 'uzayeirin', persian: 'Pasin', icon: '☀️', start: 120, end: 180, color: 'var(--gold)' },
-    { key: 'aiwisruthrem', persian: 'Shām', icon: '🌇', start: 180, end: 270, color: 'var(--violet)' },
-    { key: 'ushahin', persian: 'Shab', icon: '🌌', start: 270, end: 360, color: 'var(--navy)' },
+    { key: 'havan', avestan: 'Hāvana', persian: 'Bāmdād', icon: '🌅', start: 0, end: 120, color: 'var(--gold-light)' },
+    { key: 'rapithwin', avestan: 'Rapiθvina', persian: 'Nimruz', icon: '🔆', start: null, end: null, color: 'var(--rapithwin)', dormant: true },
+    { key: 'uzayeirin', avestan: 'Uzayeirina', persian: 'Pasin', icon: '☀️', start: 120, end: 180, color: 'var(--gold)' },
+    { key: 'aiwisruthrem', avestan: 'Aiwisrūθrima', persian: 'Sham', icon: '🌇', start: 180, end: 270, color: 'var(--violet)' },
+    { key: 'ushahin', avestan: 'Ušahina', persian: 'Shab', icon: '🌌', start: 270, end: 360, color: 'var(--navy)' },
   ];
 }
 
@@ -1025,7 +1045,7 @@ function buildGahWheelSVG(nowDeg, gahDefs, isPolar, polarState, azimuthDeg, dayl
       : 'var(--navy)';
     const markerAngle = (azimuthDeg != null) ? azimuthDeg : 0;
     const marker = polarToCartesian(cx, cy, rMid, markerAngle);
-    const label = polarGah ? `${polarGah.icon} ${polarGah.persian.toUpperCase()}` : (polarState === 'midnight-sun' ? '☀️ MIDNIGHT SUN' : '🌑 POLAR NIGHT');
+    const label = polarGah ? `${polarGah.icon} ${polarGah.avestan.toUpperCase()}` : (polarState === 'midnight-sun' ? '☀️ MIDNIGHT SUN' : '🌑 POLAR NIGHT');
     return `<svg viewBox="0 70 480 340" style="width:100%; height:auto; display:block; font-family:var(--font, sans-serif);">
       <defs>
         <linearGradient id="polarDayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1068,7 +1088,7 @@ function buildGahWheelSVG(nowDeg, gahDefs, isPolar, polarState, azimuthDeg, dayl
     ${bandPaths}
     <circle cx="${cx}" cy="${cy}" r="${rInner - 4}" fill="${centerFill}" stroke="${centerStroke}" stroke-width="1.5"/>
     <circle cx="${sunMarker.x.toFixed(1)}" cy="${sunMarker.y.toFixed(1)}" r="7" fill="#b8710a" stroke="#fff" stroke-width="2.2"/>
-    <text x="${cx}" y="${cy - 9}" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" letter-spacing="0.05em" fill="${accentColor}">${activeGah.icon} ${activeGah.persian.toUpperCase()}</text>
+    <text x="${cx}" y="${cy - 9}" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" letter-spacing="0.05em" fill="${accentColor}">${activeGah.icon} ${activeGah.avestan.toUpperCase()}</text>
     <text x="${cx}" y="${cy + 13}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="${accentColor}">${isDaylight ? '☀️' : '🌙'} ${phasePct.toFixed(1)}% ${isDaylight ? 'Light' : 'Dark'} Passed</text>
   </svg>`;
 }
@@ -1091,27 +1111,33 @@ const SEASON_PERSIAN_NAMES = { Spring: 'Bahar', Summer: 'Tabestan', Autumn: 'Pā
 const MONTH_NAMES = ['Farvardin', 'Ordibehesht', 'Khordad', 'Tir', 'Amordad', 'Shahrevar',
   'Mihr', 'Aban', 'Adar', 'Dey', 'Bahman', 'Esfand'];
 
-const DAY_NAMES = ['Hormazd', 'Bahman', 'Ordibehesht', 'Shahrevar', 'Spandarmad', 'Khordad',
-  'Amordad', 'Dae-pa-Adar', 'Adar', 'Aban', 'Khorshed', 'Mah', 'Tir', 'Gosh', 'Dae-pa-Meher',
-  'Meher', 'Srosh', 'Rashne', 'Fravardin', 'Behram', 'Ram', 'Govad', 'Dae-pa-Din', 'Din',
-  'Ashishvangh', 'Ashtad', 'Asman', 'Zamyad', 'Mahraspand', 'Aneran'];
+const DAY_NAMES = ['Hormazd', 'Bahman', 'Ordibehesht', 'Shahrevar', 'Esfand', 'Khordad',
+  'Amordad', 'Dey-ba-Adar', 'Azar / Adar', 'Aban', 'Khorshed', 'Mah', 'Tir', 'Gosh', 'Dey-ba-Mihr',
+  'Mihr / Mehr', 'Soroush', 'Rashn', 'Farvardin', 'Bahram', 'Ram', 'Bad / Vad', 'Dey-ba-Din', 'Din',
+  'Ard / Ashi', 'Ashtad', 'Asman', 'Zamyad', 'Mahraspand', 'Aneran'];
+
+/* Base Avestan form of each of the 30 day-names above, same order/index. */
+const AVESTAN_DAY_NAMES = ['Ahura Mazda', 'Vohu Manah', 'Aša Vahišta', 'Xšaθra Vairya', 'Spenta Ārmaiti',
+  'Haurvatāt', 'Ameretāt', 'Datuš Ahura Mazda', 'Ātar', 'Ap', 'Hvare-xšaēta', 'Māh', 'Tištrya', 'Geuš Urvan',
+  'Datuš Ahura Mazda', 'Mithra', 'Sraōša', 'Rašnu', 'Fravaši', 'Vərəθraγna', 'Rāman', 'Vāta',
+  'Datuš Ahura Mazda', 'Daēnā', 'Aši', 'Arštāt', 'Asman', 'Zam', 'Mąθra Spenta', 'Anaghra Raōčah'];
 
 /* Name-match Jashns: fires whenever the day's name (Rōz) matches the
    month's own dedication. monthIdx is 0-based into MONTH_NAMES; days
    are 1-based day numbers within that month. */
 const JASHNS = [
-  { name: 'Farvardingān', monthIdx: 0, days: [19], desc: 'Honoring the ancestral spirits (Fravashis).' },
-  { name: 'Ordībeheštgān', monthIdx: 1, days: [3], desc: 'Celebration of Truth, Light, and Fire.' },
-  { name: 'Khordādgān', monthIdx: 2, days: [6], desc: 'Celebration of Wholeness and Waters.' },
-  { name: 'Tīrgān', monthIdx: 3, days: [13], desc: 'Major mid-summer water festival celebrating rain, abundance, and the archer Arash.' },
-  { name: 'Amordādgān', monthIdx: 4, days: [7], desc: 'Celebration of Immortality, Life, and Plants.' },
-  { name: 'Šahrevaragān', monthIdx: 5, days: [4], desc: 'Celebration of Dominion, Strength, and Metals.' },
-  { name: 'Mihrgān', monthIdx: 6, days: [16], desc: 'Major autumn festival of contract, justice, friendship, and the harvest climax.' },
-  { name: 'Ābāngān', monthIdx: 7, days: [10], desc: 'Festival celebrating the waters and the divinity Anahita.' },
-  { name: 'Ādargān', monthIdx: 8, days: [9], desc: 'Honoring sanctified fire, warmth, and light.' },
-  { name: 'Deygān', monthIdx: 9, days: [1, 8, 15, 23], desc: "Multiple feasts to the Creator during Dey, centered on the Winter Solstice." },
-  { name: 'Bahmangān', monthIdx: 10, days: [2], desc: 'Honoring wisdom, good thought, and the protection of animal creation.' },
-  { name: 'Esfandgān', monthIdx: 11, days: [5], desc: 'Celebration of the Earth, devotion, and honors for women and mothers.' },
+  { name: 'Farvardinegan', monthIdx: 0, days: [19], desc: 'Honoring the ancestral spirits (Fravashis).' },
+  { name: 'Ordibeheshtegan', monthIdx: 1, days: [3], desc: 'Celebration of Truth, Light, and Fire.' },
+  { name: 'Khordadegan', monthIdx: 2, days: [6], desc: 'Celebration of Wholeness and Waters.' },
+  { name: 'Tirgan', monthIdx: 3, days: [13], desc: 'Major mid-summer water festival celebrating rain, abundance, and the archer Arash.' },
+  { name: 'Amordadegan', monthIdx: 4, days: [7], desc: 'Celebration of Immortality, Life, and Plants.' },
+  { name: 'Shahrevaragan', monthIdx: 5, days: [4], desc: 'Celebration of Dominion, Strength, and Metals.' },
+  { name: 'Mehregan', monthIdx: 6, days: [16], desc: 'Major autumn festival of contract, justice, friendship, and the harvest climax.' },
+  { name: 'Abanagan', monthIdx: 7, days: [10], desc: 'Festival celebrating the waters and the divinity Anahita.' },
+  { name: 'Azargan', monthIdx: 8, days: [9], desc: 'Honoring sanctified fire, warmth, and light.' },
+  { name: 'Deygan', monthIdx: 9, days: [1, 8, 15, 23], desc: "Multiple feasts to the Creator during Dey, centered on the Winter Solstice." },
+  { name: 'Bahmangan', monthIdx: 10, days: [2], desc: 'Honoring wisdom, good thought, and the protection of animal creation.' },
+  { name: 'Esfandgan', monthIdx: 11, days: [5], desc: 'Celebration of the Earth, devotion, and honors for women and mothers.' },
 ];
 
 /* Local-noon reference for the calendar day (at the observer's clock
@@ -1238,11 +1264,16 @@ function renderCalendar() {
     anchorNoon = localCalendarNoon(anchorSunrise || nowruzInstant, offsetMinutes);
   }
   // One sunrise per day boundary, fetched once and reused as consecutive
-  // pairs (day i's range = [sunrises[i], sunrises[i+1]]).
+  // pairs (day i's range = [sunrises[i], sunrises[i+1]]). Falls back to a
+  // fixed local-midnight boundary when sunrise is undefined (polar day/
+  // night), so Gregorian ranges still show instead of going blank.
   function sunriseSeries(baseDayIndex, count) {
     const arr = [];
     for (let i = 0; i <= count; i++) {
-      arr.push(validLoc ? SunCalc.getTimes(addDays(anchorNoon, baseDayIndex + i), lat, lon).sunrise : NaN);
+      if (!validLoc) { arr.push(NaN); continue; }
+      const dayNoon = addDays(anchorNoon, baseDayIndex + i);
+      const sr = SunCalc.getTimes(dayNoon, lat, lon).sunrise;
+      arr.push((sr instanceof Date && !isNaN(sr)) ? sr : new Date(dayNoon.getTime() - 12 * 3600000));
     }
     return arr;
   }
@@ -1287,14 +1318,14 @@ function renderCalendar() {
     else if (jashnHit) classes.push('jashn-day');
     else if (gahambarHit) classes.push('gahambar-day');
     else classes.push('season-tint', seasonClass);
-    const titleParts = [cardinalHit && `${cardinalHit.label} (${cardinalHit.sub})`, jashnHit && jashnHit.jashn.name, gahambarHit && gahambarHit.persian].filter(Boolean);
+    const titleParts = [cardinalHit && `${cardinalHit.label} (${cardinalHit.sub})`, jashnHit && jashnHit.jashn.name, gahambarHit && `${gahambarHit.avestan} (${gahambarHit.persian})`].filter(Boolean);
     cells += `<div class="${classes.join(' ')}" ${titleParts.length ? `title="${titleParts.join(' / ')}"` : ''}>
       <div class="d">${d}${cardinalHit ? ' ' + cardinalHit.icon : ''}${jashnHit ? ' 🎉' : ''}${gahambarHit ? ' 🌾' : ''}</div>
-      <div class="n">${DAY_NAMES[d - 1]}</div>
+      <div class="n">${AVESTAN_DAY_NAMES[d - 1]} (${DAY_NAMES[d - 1]})</div>
       ${gregLabel ? `<div class="greg">${gregLabel}</div>` : ''}
       ${cardinalHit ? `<div class="c">${cardinalHit.label} — ${cardinalHit.sub}</div>` : ''}
       ${jashnHit ? `<div class="j">${jashnHit.jashn.name}</div>` : ''}
-      ${gahambarHit ? `<div class="g">${gahambarHit.persian}</div>` : ''}
+      ${gahambarHit ? `<div class="g">${gahambarHit.avestan} (${gahambarHit.persian})</div>` : ''}
     </div>`;
   }
   grid.innerHTML = cells;
@@ -1317,12 +1348,12 @@ document.getElementById('calTodayBtn').addEventListener('click', () => {
 });
 
 const GAHAMBARS = [
-  { name: 'Maidyozarem', persian: 'Miyān-Bahār', meaning: 'Mid-Spring', lambda: 40, monthIdx: 1, day: 11, note: 'Ordibehesht 11' },
-  { name: 'Maidyoshahem', persian: 'Miyān-Tābistān', meaning: 'Mid-Summer', lambda: 100, monthIdx: 3, day: 11, note: 'Tir 11' },
-  { name: 'Paitishahem', persian: 'Pāyān Tābestān', meaning: 'Late Summer', lambda: 175, monthIdx: 5, day: 26, note: 'Shahrivar 26' },
-  { name: 'Ayathrem (Mehregān window)', persian: 'Miyān-Pāyiz', meaning: 'Mid-Autumn', lambda: 205, monthIdx: 6, day: 26, note: 'Mehr 26' },
-  { name: 'Maidyarem', persian: 'Miyān-Zamistān', meaning: 'Mid-Winter', lambda: 280, monthIdx: 9, day: 11, note: 'Dey 11' },
-  { name: 'Hamaspathmaedaya', persian: 'Pāyān Sāl', meaning: 'Late Winter', lambda: 355, monthIdx: 11, day: 26, note: 'Esfand 26' },
+  { avestan: 'Maidyō-zarmya', persian: 'Miyān Bahār', meaning: 'Mid-Spring', lambda: 40, monthIdx: 1, day: 11, note: 'Ordibehesht 11' },
+  { avestan: 'Maidyō-šama', persian: 'Miyān Tābestān', meaning: 'Mid-Summer', lambda: 100, monthIdx: 3, day: 11, note: 'Tir 11' },
+  { avestan: 'Paiti-ša-hāmya', persian: 'Pāyān Tābestān', meaning: 'End of Summer', lambda: 175, monthIdx: 5, day: 26, note: 'Shahrivar 26' },
+  { avestan: 'Aya-θrima', persian: "Miyān Pā'īz", meaning: 'Mid-Autumn', lambda: 205, monthIdx: 6, day: 26, note: 'Mehr 26' },
+  { avestan: 'Maidyō-yārya', persian: 'Miyān Zemestān', meaning: 'Mid-Winter', lambda: 280, monthIdx: 9, day: 11, note: 'Dey 11' },
+  { avestan: 'Hama-spas-maidaya', persian: 'Pāyān Sāl', meaning: 'End of Year', lambda: 355, monthIdx: 11, day: 26, note: 'Esfand 26' },
 ];
 
 /* ============================================================
@@ -1399,18 +1430,34 @@ function computeSolarDay(lat, lon, now, offsetMinutes) {
     const polarState = alt > 0 ? 'midnight-sun' : 'polar-night';
     const azimuthDeg = (SunCalc.getPosition(now, lat, lon).azimuth * 180 / Math.PI + 180 + 360) % 360;
     // Solar noon and solar midnight (nadir) stay well-defined even when
-    // sunrise/sunset don't exist, so the Gah can still be resolved:
-    // polar night is Ushahin (Shab) throughout; midnight sun splits at
-    // solar noon into Havan (Bamdad) before it and Rapithwin (Nimruz)
-    // after it, since there's no sunset to hand off to Uzayeirin.
-    let polarGahKey;
+    // sunrise/sunset don't exist, so the Gah — and a real progress window
+    // for it — can still be resolved. Nadir always precedes solar noon on
+    // the same reported calendar day. Polar Night is Ušahina (Shab) for
+    // one full nadir-to-nadir cycle; Midnight Sun alternates Hāvana
+    // (nadir -> noon) and Rapiθvina (noon -> next nadir), extending
+    // Rapiθvina forward since there's no sunset to hand off to Uzayeirina.
+    let polarGahKey, windowStart, windowEnd;
     if (polarState === 'polar-night') {
       polarGahKey = 'ushahin';
+      if (now < sunToday.nadir) { windowStart = sunYesterday.nadir; windowEnd = sunToday.nadir; }
+      else { windowStart = sunToday.nadir; windowEnd = sunTomorrow.nadir; }
     } else {
-      polarGahKey = now < sunToday.solarNoon ? 'havan' : 'rapithwin';
+      if (now < sunToday.nadir) { polarGahKey = 'rapithwin'; windowStart = sunYesterday.solarNoon; windowEnd = sunToday.nadir; }
+      else if (now < sunToday.solarNoon) { polarGahKey = 'havan'; windowStart = sunToday.nadir; windowEnd = sunToday.solarNoon; }
+      else { polarGahKey = 'rapithwin'; windowStart = sunToday.solarNoon; windowEnd = sunTomorrow.nadir; }
     }
+
+    // Noon-to-noon cycle for the "Full Solar Day" progress bar — this
+    // never depended on sunrise/sunset, so it works here too.
+    let noonCycleStart, noonCycleEnd;
+    if (now < sunToday.solarNoon) { noonCycleStart = sunYesterday.solarNoon; noonCycleEnd = sunToday.solarNoon; }
+    else { noonCycleStart = sunToday.solarNoon; noonCycleEnd = sunTomorrow.solarNoon; }
+
     const trueSolarDayLength = sunTomorrow.solarNoon - sunToday.solarNoon;
-    return { isPolar: true, polarState, polarGahKey, azimuthDeg, sunToday, trueSolarDayLength };
+    return {
+      isPolar: true, polarState, polarGahKey, azimuthDeg, sunToday, sunYesterday, sunTomorrow,
+      trueSolarDayLength, windowStart, windowEnd, noonCycleStart, noonCycleEnd,
+    };
   }
 
   const midnightToday = sunToday.nadir;
@@ -1527,33 +1574,90 @@ function tick() {
   if (sd.isPolar) {
     const polarGah = getGahDefs(true).find(g => g.key === sd.polarGahKey);
     polarBannerEl.innerHTML = sd.polarState === 'midnight-sun'
-      ? `<div class="banner polar-day">☀️ <strong>Midnight Sun</strong> — the sun does not set today at this location. Solar noon and solar midnight still fall at their usual moments, so the Gāh keeps cycling between Bāmdād and Nimruz; the dial tracks live Solar Azimuth around a full 360° ring instead of a horizon-anchored wheel.</div>`
-      : `<div class="banner polar-night">🌑 <strong>Polar Night</strong> — the sun does not rise today at this location, so it's Shab (Ushahin) throughout. The dial renders a full dark ring; the only relief is a faint civil-twilight glow near local solar noon.</div>`;
+      ? `<div class="banner polar-day">☀️ <strong>Midnight Sun</strong> — the sun does not set today at this location. Solar noon and solar midnight still fall at their usual moments, so the Gāh keeps cycling between Hāvana and Rapiθvina; the dial tracks live Solar Azimuth around a full 360° ring instead of a horizon-anchored wheel.</div>`
+      : `<div class="banner polar-night">🌑 <strong>Polar Night</strong> — the sun does not rise today at this location, so it's Ušahina (Shab) throughout. The dial renders a full dark ring; the only relief is a faint civil-twilight glow near local solar noon.</div>`;
     document.getElementById('gahClockWrap').innerHTML = buildGahWheelSVG(0, [], true, sd.polarState, sd.azimuthDeg, null, null, null, polarGah);
-    document.getElementById('gahBanner').textContent = `${polarGah.icon} ${polarGah.persian.toUpperCase()}`;
-    document.getElementById('lightDarkSplit').textContent = 'Sunrise/sunset undefined today — the full 5-Gāh sunrise/sunset cycle does not apply until the horizon returns.';
+    document.getElementById('gahBanner').textContent = `${polarGah.icon} ${polarGah.avestan.toUpperCase()} (${polarGah.persian})`;
+    document.getElementById('lightDarkSplit').textContent = 'No sunrise or sunset today — the Gāh is instead resolved from solar noon and solar midnight, which stay well-defined here.';
     document.getElementById('lightDarkDuration').textContent = '';
     document.getElementById('phaseReadouts').innerHTML = '';
-    document.getElementById('sunEventsTable').innerHTML = '';
-    document.getElementById('gahName').textContent = polarGah.persian;
-    document.getElementById('gahBar').style.width = '0%';
-    document.getElementById('gahPct').textContent = '—';
-    document.getElementById('gahPassed').textContent = '—';
-    document.getElementById('gahPassedPct').textContent = '—';
-    document.getElementById('gahRemaining').textContent = '—';
-    document.getElementById('gahRemainingPct').textContent = '—';
-    document.getElementById('dayBar').style.width = '0%';
-    document.getElementById('dayPct').textContent = '—';
-    document.getElementById('dayPassed').textContent = '—';
-    document.getElementById('dayPassedPct').textContent = '—';
-    document.getElementById('dayRemaining').textContent = '—';
-    document.getElementById('dayRemainingPct').textContent = '—';
-    document.getElementById('gahCards').innerHTML = `<p class="subtle" style="width:100%;">The 5-way sunrise/sunset breakdown doesn't apply here — right now it's ${polarGah.persian} throughout, until the horizon returns near the equinox.</p>`;
+    document.getElementById('gahName').textContent = `${polarGah.avestan} (${polarGah.persian})`;
+
+    // Active Gah progress bar — real window bounded by solar noon/midnight.
+    const gahPassedMs = now - sd.windowStart;
+    const gahDurMs = sd.windowEnd - sd.windowStart;
+    const gahPct = Math.min(100, Math.max(0, (gahPassedMs / gahDurMs) * 100));
+    document.getElementById('gahBar').style.width = `${gahPct.toFixed(2)}%`;
+    document.getElementById('gahBar').style.background = polarGah.color;
+    document.getElementById('gahPct').textContent = `${gahPct.toFixed(2)}%`;
+    document.getElementById('gahPassed').textContent = fmtDuration(gahPassedMs);
+    document.getElementById('gahPassedPct').textContent = `${gahPct.toFixed(1)}%`;
+    document.getElementById('gahRemaining').textContent = fmtDuration(sd.windowEnd - now);
+    document.getElementById('gahRemainingPct').textContent = `${(100 - gahPct).toFixed(1)}%`;
+
+    // Full Solar Day -> Full Solar Day (Noon -> Noon) here, since sunrise
+    // never happens; this always works, so it gets a real bar too.
+    document.getElementById('dayBarTitle').textContent = 'Full Solar Day (Noon → Noon)';
+    const dayPassedMs = now - sd.noonCycleStart;
+    const dayDurMs = sd.noonCycleEnd - sd.noonCycleStart;
+    const dayPct = Math.min(100, Math.max(0, (dayPassedMs / dayDurMs) * 100));
+    document.getElementById('dayBar').style.width = `${dayPct.toFixed(2)}%`;
+    document.getElementById('dayBar').style.background = 'var(--gold-deep)';
+    document.getElementById('dayPct').textContent = `${dayPct.toFixed(2)}%`;
+    document.getElementById('dayPassed').textContent = fmtDuration(dayPassedMs);
+    document.getElementById('dayPassedPct').textContent = `${dayPct.toFixed(1)}%`;
+    document.getElementById('dayRemaining').textContent = fmtDuration(sd.noonCycleEnd - now);
+    document.getElementById('dayRemainingPct').textContent = `${(100 - dayPct).toFixed(1)}%`;
+
+    // Solar Noon / Solar Midnight still happen — show them; Sunrise/Sunset
+    // genuinely don't, so they're left out rather than shown blank.
+    document.getElementById('sunEventsTable').innerHTML = [
+      ['Solar Noon', sd.sunToday.solarNoon, 'var(--rapithwin)'],
+      ['Solar Midnight', sd.sunToday.nadir, 'var(--navy)'],
+    ].map(([label, t, color]) => `
+      <div style="background: ${color}; border-radius: 10px; padding: 9px 6px 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.18);">
+        <div style="font-size:0.62rem; font-weight:800; color: rgba(255,255,255,0.85); text-transform:uppercase; letter-spacing:0.03em; white-space:nowrap;">${label}</div>
+        <div style="font-size:1rem; font-weight:800; color:#ffffff; margin-top:3px;">${fmtWallTime(t, offsetMinutes, false)}</div>
+      </div>`).join('');
+
+    // Gah sector cards — real windows for whichever Gah(s) actually apply.
+    if (sd.polarState === 'polar-night') {
+      const shabGah = getGahDefs(true).find(g => g.key === 'ushahin');
+      const share = ((sd.windowEnd - sd.windowStart) / sd.trueSolarDayLength) * 100;
+      document.getElementById('gahCards').innerHTML = `<div class="stat-card" style="background: ${shabGah.color};">
+        <strong>${shabGah.icon} ${shabGah.avestan}</strong> (${shabGah.persian})
+        Start: ${fmtWallTime(sd.windowStart, offsetMinutes, false)}<br>
+        Duration: ${fmtDuration(sd.windowEnd - sd.windowStart)}<br>
+        Share: ${share.toFixed(2)}%
+      </div>`;
+    } else {
+      const havanGah = getGahDefs(true).find(g => g.key === 'havan');
+      const rapithwinGah = getGahDefs(true).find(g => g.key === 'rapithwin');
+      const havanStart = sd.sunToday.nadir, havanEnd = sd.sunToday.solarNoon;
+      const rapithwinStart = sd.sunToday.solarNoon, rapithwinEnd = sd.sunTomorrow.nadir;
+      const havanShare = ((havanEnd - havanStart) / sd.trueSolarDayLength) * 100;
+      const rapithwinShare = ((rapithwinEnd - rapithwinStart) / sd.trueSolarDayLength) * 100;
+      document.getElementById('gahCards').innerHTML = `
+        <div class="stat-card" style="background: ${havanGah.color};">
+          <strong>${havanGah.icon} ${havanGah.avestan}</strong> (${havanGah.persian})
+          Start: ${fmtWallTime(havanStart, offsetMinutes, false)}<br>
+          Duration: ${fmtDuration(havanEnd - havanStart)}<br>
+          Share: ${havanShare.toFixed(2)}%
+        </div>
+        <div class="stat-card" style="background: ${rapithwinGah.color};">
+          <strong>${rapithwinGah.icon} ${rapithwinGah.avestan}</strong> (${rapithwinGah.persian})
+          Start: ${fmtWallTime(rapithwinStart, offsetMinutes, false)}<br>
+          Duration: ${fmtDuration(rapithwinEnd - rapithwinStart)} (extends to next Solar Midnight)<br>
+          Share: ${rapithwinShare.toFixed(2)}%
+        </div>`;
+    }
+
     document.getElementById('prevNightStart').textContent = '—';
     document.getElementById('nextMorningStart').textContent = '—';
     document.getElementById('totalDayLength').textContent = isNaN(sd.trueSolarDayLength) ? '—' : fmtDayDuration(sd.trueSolarDayLength);
     document.getElementById('rapithwinNote').textContent = '';
   } else {
+    document.getElementById('dayBarTitle').textContent = 'Full Solar Day (Sunrise → Sunrise)';
     polarBannerEl.innerHTML = '';
     const { sunrise, solarNoon, sunset, nadir, nextSunrise, solarDayLength, trueSolarDayLength, prevNightStart } = sd;
     const lambda = solarEclipticLongitude(now);
@@ -1597,7 +1701,7 @@ function tick() {
     document.getElementById('gahClockWrap').innerHTML = buildGahWheelSVG(nowDeg, gahDefs, false, null, null, daylightFraction, phasePct, renderDeg);
 
     const activeGah = gahDefs.find(g => !g.dormant && nowDeg >= g.start && nowDeg < g.end) || gahDefs[0];
-    document.getElementById('gahBanner').textContent = `${activeGah.icon} ${activeGah.persian.toUpperCase()}`;
+    document.getElementById('gahBanner').textContent = `${activeGah.icon} ${activeGah.avestan.toUpperCase()} (${activeGah.persian})`;
 
     document.getElementById('lightDarkSplit').textContent =
       `🌗 Today: ${lightPct.toFixed(1)}% Light · ${darkPct.toFixed(1)}% Dark`;
@@ -1623,7 +1727,7 @@ function tick() {
       </div>`).join('');
 
     // Active Gah progress bar
-    document.getElementById('gahName').textContent = activeGah.persian;
+    document.getElementById('gahName').textContent = `${activeGah.avestan} (${activeGah.persian})`;
     const gahStartT = degToTime(activeGah.start);
     const gahEndT = degToTime(activeGah.end);
     const gahPassedMs = now - gahStartT;
@@ -1652,14 +1756,14 @@ function tick() {
     document.getElementById('gahCards').innerHTML = gahDefs.map(g => {
       if (g.dormant) {
         return `<div class="stat-card dormant" style="background: ${g.color};">
-          <strong>${g.icon} ${g.persian}</strong>
-          Dormant this winter — Bāmdād extends through this window.
+          <strong>${g.icon} ${g.avestan}</strong> (${g.persian})
+          Dormant this winter — Hāvana (Bāmdād) extends through this window.
         </div>`;
       }
       const s = degToTime(g.start), e = degToTime(g.end);
       const share = ((e - s) / solarDayLength) * 100;
       return `<div class="stat-card" style="background: ${g.color};">
-        <strong>${g.icon} ${g.persian}</strong>
+        <strong>${g.icon} ${g.avestan}</strong> (${g.persian})
         Start: ${fmtWallTime(s, offsetMinutes, false)}<br>
         Duration: ${fmtDuration(e - s)}<br>
         Share: ${share.toFixed(2)}%
@@ -1670,7 +1774,7 @@ function tick() {
     document.getElementById('totalDayLength').textContent = fmtDayDuration(trueSolarDayLength);
     document.getElementById('rapithwinNote').textContent = rapithwinActive
       ? ''
-      : 'Nimruz (Rapithwin) is suspended — the sun sits too low for its 5 winter months, and its window folds back into Bāmdād.';
+      : 'Rapiθvina (Nimruz) is suspended — the sun sits too low for its 5 winter months, and its window folds back into Hāvana (Bāmdād).';
   }
 
   /* ---------- Zoroastrian Calendar Date (12x30 + Gāthā days) ---------- */
@@ -1680,7 +1784,7 @@ function tick() {
     document.getElementById('zDateName').textContent = `Gāthā Day ${zd.gathaDay} of 5`;
     jashnBannerEl.innerHTML = '';
   } else {
-    document.getElementById('zDateName').textContent = `${zd.monthName} ${zd.dayNumber} — Rōz ${zd.dayName}`;
+    document.getElementById('zDateName').textContent = `${zd.monthName} ${zd.dayNumber} — Rōz ${AVESTAN_DAY_NAMES[zd.dayNumber - 1]} (${zd.dayName})`;
     jashnBannerEl.innerHTML = zd.activeJashn
       ? `<div class="banner jashn">🎉 <strong>${zd.activeJashn.name}</strong><br>${zd.activeJashn.desc}</div>`
       : '';
@@ -1714,10 +1818,6 @@ function tick() {
   document.getElementById('seasonDaysPassedPct').textContent = `${seasonPct.toFixed(1)}%`;
   document.getElementById('seasonDaysRemaining').textContent = seasonDaysRemaining;
   document.getElementById('seasonDaysRemainingPct').textContent = `${(100 - seasonPct).toFixed(1)}%`;
-
-  document.getElementById('polarSunriseNote').textContent = Math.abs(lat) > 88
-    ? 'Near the pole (|lat| > 88°), sunrise becomes an annual event at Nowruz (λ = 0°), with the solar disk skimming the full 360° horizon rather than rising in minutes.'
-    : '';
 
   /* ---------- Current Solar Year (Nowruz -> next Nowruz) ---------- */
   const yearNowFull = now.getUTCFullYear();
@@ -1758,7 +1858,7 @@ function tick() {
 
   document.getElementById('gahambarTable').innerHTML = GAHAMBARS.map(gb => `
     <div class="stat-card compact" style="background: ${jashnSeasonColors[gb.monthIdx]};">
-      <strong>${gb.persian}</strong>
+      <strong>${gb.avestan}</strong> (${gb.persian})
       ${gb.meaning} · ${gb.note}
     </div>`).join('');
 
