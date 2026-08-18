@@ -396,10 +396,8 @@
     <label for="longitude" style="font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 3px;">Longitude:</label>
     <input type="text" id="longitude" name="longitude" value="-77.3064" style="padding: 6px; width: 60%; border-radius: 5px; border: 1px solid #ccc; font-size: 0.95rem; margin-bottom: 0.6rem;">
     <div>
-      <button id="getLocationBtn" style="padding: 9px 18px; margin: 4px 3px 0; border: 1.5px solid var(--card-border); border-radius: 8px; background: var(--card-bg); color: var(--text-primary); font-size: 0.9rem; font-weight: 600;">📍 Get Location</button>
       <button id="calculateBtn" style="padding: 9px 18px; margin: 4px 3px 0; border: none; border-radius: 8px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: white; font-size: 0.9rem; font-weight: 600; box-shadow: 0 2px 8px rgba(224,138,30,0.3);">🧮 Calculate</button>
     </div>
-    <p class="status" id="locationStatus"></p>
   </div>
 
   <!-- ===================== ZOROASTRIAN CALENDAR DATE ===================== -->
@@ -1819,32 +1817,6 @@ document.getElementById('location').addEventListener('change', (e) => {
     document.getElementById('longitude').value = opt.dataset.lon;
   }
   startLiveUpdates();
-});
-
-document.getElementById('getLocationBtn').addEventListener('click', () => {
-  const status = document.getElementById('locationStatus');
-  if (!navigator.geolocation) {
-    status.textContent = 'Geolocation is not supported by this browser.';
-    return;
-  }
-  status.textContent = 'Locating…';
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      document.getElementById('latitude').value = pos.coords.latitude.toFixed(4);
-      document.getElementById('longitude').value = pos.coords.longitude.toFixed(4);
-      const nowOffsetMin = -new Date().getTimezoneOffset();
-      const select = document.getElementById('location');
-      let bestIdx = 0, bestDiff = Infinity;
-      for (let i = 0; i < select.options.length; i++) {
-        const diff = Math.abs(parseInt(select.options[i].value, 10) - nowOffsetMin);
-        if (diff < bestDiff) { bestDiff = diff; bestIdx = i; }
-      }
-      select.selectedIndex = bestIdx;
-      status.textContent = 'Location updated. Click Calculate to refresh.';
-      startLiveUpdates();
-    },
-    (err) => { status.textContent = `Could not get location: ${err.message}`; }
-  );
 });
 
 window.addEventListener('load', () => {
