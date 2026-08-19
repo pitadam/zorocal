@@ -42,6 +42,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      font-variant-numeric: tabular-nums;
     }
 
     .box {
@@ -109,11 +110,58 @@
       margin-bottom: 4px;
       color: #ffffff;
     }
+    .stat-card.gah-card {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      min-height: 128px;
+      padding: 10px 11px;
+    }
+    .gah-card-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 1px;
+    }
+    .gah-card-head .gah-icon {
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .gah-card-head .gah-name {
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+    }
+    .gah-card-sub {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 6px;
+    }
+    .gah-card-row {
+      font-size: 0.76rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .gah-card-note {
+      font-size: 0.76rem;
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: normal;
+      margin-top: 2px;
+    }
     .stat-card.dormant {
       background: repeating-linear-gradient(135deg, #d8d8e2, #d8d8e2 10px, #cfcfdb 10px, #cfcfdb 20px) !important;
       color: var(--text-secondary);
     }
     .stat-card.dormant strong { color: var(--text-secondary); }
+    .stat-card.dormant .gah-name,
+    .stat-card.dormant .gah-card-sub,
+    .stat-card.dormant .gah-card-row,
+    .stat-card.dormant .gah-card-note { color: var(--text-secondary); }
     .stat-card.compact {
       min-height: 58px;
       padding: 8px 8px;
@@ -148,6 +196,12 @@
       letter-spacing: 0.02em;
       opacity: 0.8;
     }
+    .stat-card.season .cardinal-sub {
+      font-size: 0.72rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-bottom: 4px !important;
+    }
 
     .mini-card {
       background: var(--bg);
@@ -171,6 +225,16 @@
     .banner.polar-day { background: linear-gradient(135deg, var(--gold-light), var(--gold-deep)); color: #fff; }
     .banner.polar-night { background: linear-gradient(135deg, var(--navy-deep), var(--navy)); color: #fff; }
     .banner.jashn { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: #fff; text-align: center; }
+    .banner.jashn .jashn-yasna { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85; margin-top: 4px; }
+    .banner.jashn .jashn-avestan { font-size: 1.05rem; font-weight: 800; letter-spacing: 0.01em; margin-top: 1px; }
+    .banner.jashn .jashn-persian { font-size: 0.82rem; font-weight: 600; opacity: 0.9; margin-top: 2px; }
+    .banner.jashn .jashn-desc { font-size: 0.8rem; font-weight: 500; opacity: 0.9; margin-top: 6px; }
+
+    .stat-card.jashn-card { text-align: center; align-items: center; justify-content: center; }
+    .stat-card.jashn-card .jashn-yasna { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.85; }
+    .stat-card.jashn-card .jashn-avestan { font-size: 0.88rem; font-weight: 800; letter-spacing: 0.01em; margin-top: 1px; }
+    .stat-card.jashn-card .jashn-persian { font-size: 0.72rem; font-weight: 600; opacity: 0.9; margin-top: 2px; }
+    .stat-card.jashn-card .jashn-date { font-size: 0.7rem; font-weight: 600; opacity: 0.85; margin-top: 5px; }
 
     /* Monthly Calendar (one month at a time) */
     .cal-nav {
@@ -209,7 +273,7 @@
       border-radius: 9px;
       padding: 8px 3px 7px;
       text-align: center;
-      min-height: 56px;
+      min-height: 122px;
     }
     /* Season tint for ordinary (non-highlighted) days — same 4-color
        palette used everywhere else in the app. White text throughout
@@ -221,6 +285,7 @@
     .cal-cell.season-tint .d { color: #ffffff; }
     .cal-cell.season-tint .n { color: rgba(255,255,255,0.85); }
     .cal-cell.season-tint .greg { color: rgba(255,255,255,0.72); }
+    .cal-cell.season-tint .pers { color: rgba(255,255,255,0.72); }
     .cal-cell.today { box-shadow: inset 0 0 0 2px var(--gold-deep); background: #fff8ec; }
     .cal-cell.jashn-day { box-shadow: inset 0 0 0 2px var(--violet); background: #f4f2fd; }
     .cal-cell.gahambar-day { box-shadow: inset 0 0 0 2px var(--gold-deep); background: #fdf3e4; }
@@ -228,7 +293,10 @@
     .cal-cell .d { font-size: 0.86rem; font-weight: 800; color: var(--text-primary); }
     .cal-cell .n { font-size: 0.6rem; font-weight: 600; color: var(--text-secondary); line-height: 1.2; margin-top: 2px; word-break: break-word; }
     .cal-cell .greg { font-size: 0.56rem; font-weight: 600; color: var(--text-tertiary); line-height: 1.2; margin-top: 2px; white-space: nowrap; }
-    .cal-cell .j { font-size: 0.56rem; font-weight: 700; color: var(--violet); line-height: 1.2; margin-top: 3px; word-break: break-word; }
+    .cal-cell .pers { font-size: 0.56rem; font-weight: 600; color: var(--text-tertiary); line-height: 1.2; margin-top: 1px; white-space: nowrap; }
+    .cal-cell .j { font-size: 0.56rem; font-weight: 700; color: var(--violet); line-height: 1.25; margin-top: 3px; word-break: break-word; }
+    .cal-cell .j .j-yasna { text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.8; font-weight: 600; font-size: 0.5rem; }
+    .cal-cell .j .j-avestan { font-weight: 800; }
     .cal-cell .g { font-size: 0.56rem; font-weight: 700; color: var(--gold-deep); line-height: 1.2; margin-top: 3px; word-break: break-word; }
     .cal-cell .c { font-size: 0.56rem; font-weight: 700; color: var(--indigo); line-height: 1.2; margin-top: 3px; word-break: break-word; }
 
@@ -311,7 +379,7 @@
       padding: 1px 5px;
       font-size: 0.85em;
     }
-    .help-content table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
+    .help-content table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
     .help-content th {
       text-align: left;
       background: var(--card-bg);
@@ -326,9 +394,19 @@
       padding: 7px 9px;
       border-bottom: 1px solid var(--card-border);
       color: var(--text-secondary);
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .help-content td strong { color: var(--text-primary); }
     .help-content tr:last-child td { border-bottom: none; }
+    .help-content td .td-event {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+    .help-content table td:first-child { white-space: normal; }
+    #help-gahs table td:first-child { width: 40%; }
     .help-content .note {
       background: var(--card-bg);
       border-left: 3px solid var(--gold-deep);
@@ -381,18 +459,42 @@
       <option value="-570" data-lat="-9.7797" data-lon="-139.0768">UTC−09:30 — Marquesas Islands, French Polynesia</option>
       <option value="-540" data-lat="61.2181" data-lon="-149.9003">UTC−09:00 — Anchorage, Alaska (USA)</option>
       <option value="-480" data-lat="34.0522" data-lon="-118.2437">UTC−08:00 — Los Angeles, USA</option>
+      <option value="-480" data-lat="49.2827" data-lon="-123.1207">UTC−08:00 — Vancouver, Canada</option>
       <option value="-420" data-lat="33.4484" data-lon="-112.0740">UTC−07:00 — Phoenix, USA</option>
+      <option value="-420" data-lat="39.7392" data-lon="-104.9903">UTC−07:00 — Denver, USA</option>
       <option value="-360" data-lat="19.4326" data-lon="-99.1332">UTC−06:00 — Mexico City, Mexico</option>
+      <option value="-360" data-lat="41.8781" data-lon="-87.6298">UTC−06:00 — Chicago, USA</option>
       <option value="-300" selected data-lat="40.7128" data-lon="-74.0060">UTC−05:00 — New York, USA</option>
+      <option value="-300" data-lat="43.6532" data-lon="-79.3832">UTC−05:00 — Toronto, Canada</option>
+      <option value="-300" data-lat="23.1136" data-lon="-82.3666">UTC−05:00 — Havana, Cuba</option>
+      <option value="-300" data-lat="4.7110" data-lon="-74.0721">UTC−05:00 — Bogotá, Colombia</option>
+      <option value="-300" data-lat="-12.0464" data-lon="-77.0428">UTC−05:00 — Lima, Peru</option>
+      <option value="-300" data-lat="-0.1807" data-lon="-78.4678">UTC−05:00 — Quito, Ecuador</option>
       <option value="-240" data-lat="10.4806" data-lon="-66.9036">UTC−04:00 — Caracas, Venezuela</option>
+      <option value="-240" data-lat="44.6488" data-lon="-63.5752">UTC−04:00 — Halifax, Canada</option>
+      <option value="-240" data-lat="-33.4489" data-lon="-70.6693">UTC−04:00 — Santiago, Chile</option>
       <option value="-210" data-lat="47.5615" data-lon="-52.7126">UTC−03:30 — St. John's, Canada (Newfoundland)</option>
       <option value="-180" data-lat="-34.6037" data-lon="-58.3816">UTC−03:00 — Buenos Aires, Argentina</option>
+      <option value="-180" data-lat="-23.5505" data-lon="-46.6333">UTC−03:00 — São Paulo, Brazil</option>
       <option value="-120" data-lat="-54.4296" data-lon="-36.5879">UTC−02:00 — South Georgia (UK territory)</option>
       <option value="-60" data-lat="37.7412" data-lon="-25.6756">UTC−01:00 — Azores, Portugal</option>
       <option value="0" data-lat="51.5074" data-lon="-0.1278">UTC±00:00 — London, United Kingdom</option>
+      <option value="0" data-lat="64.1466" data-lon="-21.9426">UTC±00:00 — Reykjavik, Iceland</option>
+      <option value="0" data-lat="33.5731" data-lon="-7.5898">UTC±00:00 — Casablanca, Morocco</option>
       <option value="60" data-lat="52.5200" data-lon="13.4050">UTC+01:00 — Berlin, Germany</option>
+      <option value="60" data-lat="55.6761" data-lon="12.5683">UTC+01:00 — Copenhagen, Denmark</option>
+      <option value="60" data-lat="48.8566" data-lon="2.3522">UTC+01:00 — Paris, France</option>
+      <option value="60" data-lat="40.4168" data-lon="-3.7038">UTC+01:00 — Madrid, Spain</option>
+      <option value="60" data-lat="41.9028" data-lon="12.4964">UTC+01:00 — Rome, Italy</option>
+      <option value="60" data-lat="6.5244" data-lon="3.3792">UTC+01:00 — Lagos, Nigeria</option>
       <option value="120" data-lat="30.0444" data-lon="31.2357">UTC+02:00 — Cairo, Egypt</option>
+      <option value="120" data-lat="-26.2041" data-lon="28.0473">UTC+02:00 — Johannesburg, South Africa</option>
       <option value="180" data-lat="24.7136" data-lon="46.6753">UTC+03:00 — Riyadh, Saudi Arabia</option>
+      <option value="180" data-lat="55.7558" data-lon="37.6173">UTC+03:00 — Moscow, Russia</option>
+      <option value="180" data-lat="-1.2921" data-lon="36.8219">UTC+03:00 — Nairobi, Kenya</option>
+      <option value="180" data-lat="9.0300" data-lon="38.7400">UTC+03:00 — Addis Ababa, Ethiopia</option>
+      <option value="180" data-lat="41.0082" data-lon="28.9784">UTC+03:00 — Istanbul, Turkey</option>
+      <option value="180" data-lat="25.2854" data-lon="51.5310">UTC+03:00 — Doha, Qatar</option>
       <option value="210" data-lat="35.6892" data-lon="51.3890">UTC+03:30 — Tehran, Iran</option>
       <option value="240" data-lat="25.2048" data-lon="55.2708">UTC+04:00 — Dubai, UAE</option>
       <option value="270" data-lat="34.5553" data-lon="69.2075">UTC+04:30 — Kabul, Afghanistan</option>
@@ -402,20 +504,38 @@
       <option value="360" data-lat="23.8103" data-lon="90.4125">UTC+06:00 — Dhaka, Bangladesh</option>
       <option value="390" data-lat="16.8409" data-lon="96.1735">UTC+06:30 — Yangon, Myanmar</option>
       <option value="420" data-lat="13.7563" data-lon="100.5018">UTC+07:00 — Bangkok, Thailand</option>
+      <option value="420" data-lat="-6.2088" data-lon="106.8456">UTC+07:00 — Jakarta, Indonesia</option>
       <option value="480" data-lat="39.9042" data-lon="116.4074">UTC+08:00 — Beijing, China</option>
       <option value="480" data-lat="14.5995" data-lon="120.9842">UTC+08:00 — Manila, Philippines</option>
+      <option value="480" data-lat="1.3521" data-lon="103.8198">UTC+08:00 — Singapore</option>
+      <option value="480" data-lat="-31.9505" data-lon="115.8605">UTC+08:00 — Perth, Australia</option>
       <option value="525" data-lat="-31.6784" data-lon="128.8997">UTC+08:45 — Eucla, Australia (unofficial)</option>
       <option value="540" data-lat="35.6762" data-lon="139.6503">UTC+09:00 — Tokyo, Japan</option>
+      <option value="540" data-lat="37.5665" data-lon="126.9780">UTC+09:00 — Seoul, South Korea</option>
       <option value="570" data-lat="-34.9285" data-lon="138.6007">UTC+09:30 — Adelaide, Australia</option>
       <option value="600" data-lat="-33.8688" data-lon="151.2093">UTC+10:00 — Sydney, Australia</option>
+      <option value="600" data-lat="-9.4438" data-lon="147.1803">UTC+10:00 — Port Moresby, Papua New Guinea</option>
+      <option value="600" data-lat="13.4443" data-lon="144.7937">UTC+10:00 — Guam, USA</option>
       <option value="630" data-lat="-31.5553" data-lon="159.0803">UTC+10:30 — Lord Howe Island, Australia</option>
       <option value="660" data-lat="-9.4456" data-lon="159.9729">UTC+11:00 — Honiara, Solomon Islands</option>
+      <option value="660" data-lat="-22.2758" data-lon="166.4581">UTC+11:00 — Nouméa, New Caledonia</option>
       <option value="720" data-lat="-18.1416" data-lon="178.4419">UTC+12:00 — Suva, Fiji</option>
+      <option value="720" data-lat="-36.8485" data-lon="174.7633">UTC+12:00 — Auckland, New Zealand</option>
       <option value="765" data-lat="-43.9500" data-lon="-176.5500">UTC+12:45 — Chatham Islands, New Zealand</option>
       <option value="780" data-lat="-21.1393" data-lon="-175.2049">UTC+13:00 — Nukuʻalofa, Tonga</option>
       <option value="840" data-lat="1.8721" data-lon="-157.4278">UTC+14:00 — Kiritimati, Kiribati</option>
-      <option value="90" data-lat="78.2232" data-lon="15.6267">UTC+02:00 — Longyearbyen, Svalbard (polar test)</option>
-      <option value="-180" data-lat="-90.0000" data-lon="0.0000">UTC−03:00 — Amundsen–Scott South Pole Station (polar test)</option>
+      <option value="60" data-lat="78.2232" data-lon="15.6267">UTC+01:00 — Longyearbyen, Svalbard (NP · TT)</option>
+      <option value="60" data-lat="78.9243" data-lon="11.9312">UTC+01:00 — Ny-Ålesund, Svalbard (NP · TT)</option>
+      <option value="60" data-lat="69.6492" data-lon="18.9553">UTC+01:00 — Tromsø, Norway (NP · TT)</option>
+      <option value="-240" data-lat="77.4840" data-lon="-69.3632">UTC−04:00 — Qaanaaq, Greenland (NP · TT)</option>
+      <option value="-300" data-lat="82.5018" data-lon="-62.3481">UTC−05:00 — Alert, Nunavut, Canada (NP · TT)</option>
+      <option value="-540" data-lat="71.2906" data-lon="-156.7886">UTC−09:00 — Utqiagvik (Barrow), Alaska, USA (NP · TT)</option>
+      <option value="-180" data-lat="-90.0000" data-lon="0.0000">UTC−03:00 — Amundsen–Scott South Pole Station (SP · TT)</option>
+      <option value="-180" data-lat="-67.5675" data-lon="-68.1258">UTC−03:00 — Rothera Research Station, Antarctica (SP · TT)</option>
+      <option value="-120" data-lat="-54.2811" data-lon="-36.5092">UTC−02:00 — Grytviken, South Georgia (SP · TT)</option>
+      <option value="0" data-lat="-78.4645" data-lon="106.8339">UTC±00:00 — Vostok Station, Antarctica (SP · TT)</option>
+      <option value="660" data-lat="-66.2818" data-lon="110.5276">UTC+11:00 — Casey Station, Antarctica (SP · TT)</option>
+      <option value="720" data-lat="-77.8419" data-lon="166.6863">UTC+12:00 — McMurdo Station, Antarctica (SP · TT)</option>
     </select>
     <label for="latitude" style="font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 3px;">Latitude:</label>
     <input type="text" id="latitude" name="latitude" value="38.8462" style="padding: 6px; width: 60%; border-radius: 5px; border: 1px solid #ccc; font-size: 0.95rem; margin-bottom: 0.6rem;">
@@ -430,6 +550,7 @@
   <div class="box">
     <h2>📅 Today</h2>
     <h3 id="zDateName" style="font-size:1.4rem; letter-spacing:0.02em; margin: 0.75rem 0 0.15rem; font-family: var(--font-display);">—</h3>
+    <p id="daysSinceNowruz" class="subtle" style="margin: 0 0 0.5rem;">—</p>
     <div id="jashnBanner"></div>
   </div>
 
@@ -445,7 +566,7 @@
   </div>
 
   <div class="box">
-    <h2>🎉 Jashns of the Year</h2>
+    <h2>🎉 Yasnas (Jashns) of the Year</h2>
     <div id="jashnTable" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
   </div>
 
@@ -460,8 +581,9 @@
     <p class="subtle" id="lightDarkDuration" style="margin-top: 0.15rem;">—</p>
     <div id="phaseReadouts" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-width: 440px; margin: 0.75rem auto 0 auto;"></div>
 
-    <div id="sunEventsTable" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 100px)); justify-content: center; gap: 8px; margin: 1rem auto 1rem auto;"></div>
+    <div id="sunEventsTable" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 300px; margin: 1rem auto 1rem auto;"></div>
     <p><strong>Current Time:</strong> <span id="currentTime">—</span></p>
+    <p class="subtle" style="margin-top: -0.4rem;">Daylight Saving Time: not observed (fixed UTC offset used year-round)</p>
 
     <div style="margin-top: 1rem;">
       <h3 style="margin-bottom: 0.5rem;">Active Gāh (<span id="gahName">—</span>)</h3>
@@ -544,6 +666,7 @@
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
       <div class="stat-card season" style="background: var(--gold-light);">
         <div class="title">🌱 Vaŋhar (Bahār)</div>
+        <div class="cardinal-sub">Nava Raočå (Nowruz)</div>
         <div class="tag">Equinox</div>
         <div>Start: <span id="springStart">—</span></div>
         <div>Length: <span id="springLength">—</span></div>
@@ -551,6 +674,7 @@
       </div>
       <div class="stat-card season" style="background: var(--gold);">
         <div class="title">☀️ Hama (Tābestān)</div>
+        <div class="cardinal-sub">Yasna Tištryahe (Tirgan)</div>
         <div class="tag">Solstice</div>
         <div>Start: <span id="summerStart">—</span></div>
         <div>Length: <span id="summerLength">—</span></div>
@@ -558,6 +682,7 @@
       </div>
       <div class="stat-card season" style="background: var(--violet);">
         <div class="title">🍂 Paiti-iš (Pā'īz)</div>
+        <div class="cardinal-sub">Yasna Mithrahe (Mehregan)</div>
         <div class="tag">Equinox</div>
         <div>Start: <span id="autumnStart">—</span></div>
         <div>Length: <span id="autumnLength">—</span></div>
@@ -565,6 +690,7 @@
       </div>
       <div class="stat-card season" style="background: var(--navy);">
         <div class="title">❄️ Zima (Zemestān)</div>
+        <div class="cardinal-sub">Maidyāriya (Shabe Chelleh)</div>
         <div class="tag">Solstice</div>
         <div>Start: <span id="winterStart">—</span></div>
         <div>Length: <span id="winterLength">—</span></div>
@@ -576,7 +702,7 @@
 
   <div class="box">
     <h2>🎉 Gāhambār Midpoints</h2>
-    <div id="gahambarTable" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;"></div>
+    <div id="gahambarTable" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 10px;"></div>
   </div>
 
   <!-- ===================== LUNAR MODULE ===================== -->
@@ -717,12 +843,12 @@
         <h2>4. The 5 Gāhs</h2>
         <p>The day divides into 5 periods bounded by real solar events at your location. Pasin's start is fixed at a set point on the app's degree scale (120°) rather than tracking a named astronomical event; the other four boundaries all track a real event directly.</p>
         <table>
-          <tr><th>Avestan</th><th>Persian</th><th>Astronomical Event</th><th>Span</th></tr>
-          <tr><td>Hāvana</td><td>Bāmdād</td><td>Sunrise → Solar Noon</td><td>Begins the instant the sun's upper limb crosses the eastern horizon; ends at solar meridian transit.</td></tr>
-          <tr><td>Rapiθvina</td><td>Nimruz</td><td>Solar Noon → Pasin's start</td><td>Begins exactly at solar noon, extending a short way into early afternoon.</td></tr>
-          <tr><td>Uzayeirina</td><td>Pasin</td><td>Fixed start → Sunset</td><td>Afternoon decline, ending the instant the sun's disk drops below the western horizon.</td></tr>
-          <tr><td>Aiwisrūθrima</td><td>Sham</td><td>Sunset → Solar Midnight</td><td>Dusk through the twilight stages to solar midnight (nadir).</td></tr>
-          <tr><td>Ušahina</td><td>Shab</td><td>Solar Midnight → next Sunrise</td><td>From the nadir through pre-dawn to the next sunrise.</td></tr>
+          <tr><th>Gāh</th><th>Span</th></tr>
+          <tr><td><strong>Hāvana</strong> (Bāmdād)<br><span class="td-event">Sunrise → Solar Noon</span></td><td>Begins the instant the sun's upper limb crosses the eastern horizon; ends at solar meridian transit.</td></tr>
+          <tr><td><strong>Rapiθvina</strong> (Nimruz)<br><span class="td-event">Solar Noon → Pasin's start</span></td><td>Begins exactly at solar noon, extending a short way into early afternoon.</td></tr>
+          <tr><td><strong>Uzayeirina</strong> (Pasin)<br><span class="td-event">Fixed start → Sunset</span></td><td>Afternoon decline, ending the instant the sun's disk drops below the western horizon.</td></tr>
+          <tr><td><strong>Aiwisrūθrima</strong> (Sham)<br><span class="td-event">Sunset → Solar Midnight</span></td><td>Dusk through the twilight stages to solar midnight (nadir).</td></tr>
+          <tr><td><strong>Ušahina</strong> (Shab)<br><span class="td-event">Solar Midnight → next Sunrise</span></td><td>From the nadir through pre-dawn to the next sunrise.</td></tr>
         </table>
         <div class="note">
           <strong>Rapiθvina is suspended for 5 months a year</strong>, centered on the local winter solstice. During that window, Hāvana (Bāmdād) extends from 0°–90° to 0°–120°, covering Rapiθvina's slot. Pasin is unaffected either way — always 120°–180°.
@@ -770,7 +896,7 @@
           <div class="mini" style="background: var(--gold-light);">Nōrūz<br><span style="font-weight:600; font-size:0.75rem;">Spring Equinox</span></div>
           <div class="mini" style="background: var(--gold);">Tīrgān<br><span style="font-weight:600; font-size:0.75rem;">Summer Solstice</span></div>
           <div class="mini" style="background: var(--violet);">Mihrgān<br><span style="font-weight:600; font-size:0.75rem;">Autumn Equinox</span></div>
-          <div class="mini" style="background: var(--navy);">Yalda<br><span style="font-weight:600; font-size:0.75rem;">Winter Solstice</span></div>
+          <div class="mini" style="background: var(--navy);">Shabe Chelleh<br><span style="font-weight:600; font-size:0.75rem;">Winter Solstice</span></div>
         </div>
         <p>Nōrūz is Farvardin 1. The four seasons are Bahār, Tābestān, Pā'īz, and Zemestān.</p>
         <div class="uncertain">
@@ -803,7 +929,7 @@
           <tr><td>Midnight Sun, nadir → solar noon</td><td>Hāvana (Bāmdād)</td></tr>
           <tr><td>Midnight Sun, solar noon → next nadir</td><td>Rapiθvina (Nimruz), extended — there's no sunset to hand off to Uzayeirina</td></tr>
         </table>
-        <p>The Active Gāh progress bar, and the Gāh Sectors cards, use these same nadir/noon windows to show real elapsed and remaining time — not placeholder text. The Full Solar Day bar retitles itself to "Noon → Noon" and tracks that cycle instead of sunrise-to-sunrise, since sunrise doesn't happen. The Sunrise/Sunset entries are left out of the daily event list rather than shown blank; Solar Noon and Solar Midnight are shown as usual. The Monthly Calendar's Gregorian date labels fall back to a fixed day boundary so they keep displaying even without a sunrise to anchor them.</p>
+        <p>The Active Gāh progress bar, and the Gāh Sectors cards, use these same nadir/noon windows to show real elapsed and remaining time — not placeholder text. During Midnight Sun, the Full Solar Day bar retitles itself to "Noon → Noon" and tracks that cycle instead of sunrise-to-sunrise, since sunrise doesn't happen. During Polar Night, Ušahina (Shab) already spans the entire day as one continuous nadir-to-nadir Gāh, so the Full Solar Day bar reuses that exact same window and retitles to "Midnight → Midnight" — the two percentages always agree in that state, rather than being measured from two different anchors. The Sunrise/Sunset entries are left out of the daily event list rather than shown blank; Solar Noon and Solar Midnight are shown as usual. The Monthly Calendar's Gregorian date labels fall back to a fixed day boundary so they keep displaying even without a sunrise to anchor them.</p>
         <p>During Midnight Sun the dial switches to tracking live solar azimuth around a full 360° ring rather than a horizon-anchored wheel, since there's no sunrise/sunset pair to anchor it to.</p>
         <p>Everything not tied to sunrise/sunset — Current Season, Current Solar Year, the Zoroastrian calendar date, equinox and solstice timing — is unaffected at any latitude, poles included, since none of it depends on the observer's horizon.</p>
       </div>
@@ -912,6 +1038,14 @@ function fmtDayDurationTwoLine(ms) {
   const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;
   return `${d}d ${h}h<br>${m}m ${s}s`;
+}
+
+/* Splits a Jashn's full Avestan name ("Yasna Fravashinąm") into the
+   leading "Yasna" word and the Avestan word itself, so displays can
+   stack them uniformly: Yasna / <Avestan word> / (Jashn ...). */
+function jashnParts(j) {
+  const [yasnaWord, ...rest] = j.avestanFull.split(' ');
+  return { yasnaWord, avestanWord: rest.join(' ') };
 }
 
 function fmtWallTime(date, offsetMinutes, includeDate) {
@@ -1108,8 +1242,19 @@ function buildGahWheelSVG(nowDeg, gahDefs, isPolar, polarState, azimuthDeg, dayl
 // hemisphere-swapped where needed).
 const SEASON_PERSIAN_NAMES = { Spring: 'Bahar', Summer: 'Tabestan', Autumn: 'Pāiz', Winter: 'Zemestan' };
 
-const MONTH_NAMES = ['Farvardin', 'Ordibehesht', 'Khordad', 'Tir', 'Amordad', 'Shahrevar',
-  'Mihr', 'Aban', 'Adar', 'Dey', 'Bahman', 'Esfand'];
+/* The Younger-Avestan two-season year: "Hama" (the ~7-month warm half,
+   covering Spring and Summer) and "Zaiiana" (the ~5-month cold half,
+   covering Autumn and Winter) — the actual season division attested in
+   the Avesta, distinct from the 4 Western equinox/solstice quarters. */
+const SEASON_AVESTAN_NAMES = { Spring: 'Hama', Summer: 'Hama', Autumn: 'Zaiiana', Winter: 'Zaiiana' };
+
+const MONTH_NAMES = ['Farvardin', 'Ordibehesht', 'Khordad', 'Tir', 'Amordad', 'Shahrivar',
+  'Mehr', 'Aban', 'Azar', 'Dey', 'Bahman', 'Esfand'];
+
+/* Base Avestan form of each of the 12 month names above, same order/index. */
+const AVESTAN_MONTH_NAMES = ['Fravashinąm', 'Ašahe Vahištahe', 'Haurvatātō', 'Tištryahe',
+  'Ameretātō', 'Xšaθrahe Vairyehe', 'Mithrahe', 'Āpąm', 'Āθrō', 'Dathušō', 'Vaŋheuš Manaŋhō',
+  'Spentayāi Ārmatōiš'];
 
 const DAY_NAMES = ['Hormazd', 'Bahman', 'Ordibehesht', 'Shahrevar', 'Esfand', 'Khordad',
   'Amordad', 'Dey-ba-Adar', 'Azar / Adar', 'Aban', 'Khorshed', 'Mah', 'Tir', 'Gosh', 'Dey-ba-Mihr',
@@ -1126,18 +1271,18 @@ const AVESTAN_DAY_NAMES = ['Ahura Mazda', 'Vohu Manah', 'Aša Vahišta', 'Xšaθ
    month's own dedication. monthIdx is 0-based into MONTH_NAMES; days
    are 1-based day numbers within that month. */
 const JASHNS = [
-  { name: 'Farvardinegan', monthIdx: 0, days: [19], desc: 'Honoring the ancestral spirits (Fravashis).' },
-  { name: 'Ordibeheshtegan', monthIdx: 1, days: [3], desc: 'Celebration of Truth, Light, and Fire.' },
-  { name: 'Khordadegan', monthIdx: 2, days: [6], desc: 'Celebration of Wholeness and Waters.' },
-  { name: 'Tirgan', monthIdx: 3, days: [13], desc: 'Major mid-summer water festival celebrating rain, abundance, and the archer Arash.' },
-  { name: 'Amordadegan', monthIdx: 4, days: [7], desc: 'Celebration of Immortality, Life, and Plants.' },
-  { name: 'Shahrevaragan', monthIdx: 5, days: [4], desc: 'Celebration of Dominion, Strength, and Metals.' },
-  { name: 'Mehregan', monthIdx: 6, days: [16], desc: 'Major autumn festival of contract, justice, friendship, and the harvest climax.' },
-  { name: 'Abanagan', monthIdx: 7, days: [10], desc: 'Festival celebrating the waters and the divinity Anahita.' },
-  { name: 'Azargan', monthIdx: 8, days: [9], desc: 'Honoring sanctified fire, warmth, and light.' },
-  { name: 'Deygan', monthIdx: 9, days: [1, 8, 15, 23], desc: "Multiple feasts to the Creator during Dey, centered on the Winter Solstice." },
-  { name: 'Bahmangan', monthIdx: 10, days: [2], desc: 'Honoring wisdom, good thought, and the protection of animal creation.' },
-  { name: 'Esfandgan', monthIdx: 11, days: [5], desc: 'Celebration of the Earth, devotion, and honors for women and mothers.' },
+  { name: 'Farvardinegan', avestanFull: 'Yasna Fravashinąm', persianFull: 'Jashn Farvardinegan', monthIdx: 0, days: [19], desc: 'Honoring the ancestral spirits (Fravashis).' },
+  { name: 'Ordibeheshtegan', avestanFull: 'Yasna Ašahe Vahištahe', persianFull: 'Jashn Ordibeheshtegan', monthIdx: 1, days: [3], desc: 'Celebration of Truth, Light, and Fire.' },
+  { name: 'Khordadegan', avestanFull: 'Yasna Haurvatātō', persianFull: 'Jashn Khordadegan', monthIdx: 2, days: [6], desc: 'Celebration of Wholeness and Waters.' },
+  { name: 'Tirgan', avestanFull: 'Yasna Tištryahe', persianFull: 'Jashn Tirgan', monthIdx: 3, days: [13], desc: 'Major mid-summer water festival celebrating rain, abundance, and the archer Arash.' },
+  { name: 'Amordadegan', avestanFull: 'Yasna Ameretātō', persianFull: 'Jashn Amordadegan', monthIdx: 4, days: [7], desc: 'Celebration of Immortality, Life, and Plants.' },
+  { name: 'Shahrevaragan', avestanFull: 'Yasna Xšaθrahe Vairyehe', persianFull: 'Jashn Shahrivaregan', monthIdx: 5, days: [4], desc: 'Celebration of Dominion, Strength, and Metals.' },
+  { name: 'Mehregan', avestanFull: 'Yasna Mithrahe', persianFull: 'Jashn Mehregan', monthIdx: 6, days: [16], desc: 'Major autumn festival of contract, justice, friendship, and the harvest climax.' },
+  { name: 'Abanagan', avestanFull: 'Yasna Āpąm', persianFull: 'Jashn Abangan', monthIdx: 7, days: [10], desc: 'Festival celebrating the waters and the divinity Anahita.' },
+  { name: 'Azargan', avestanFull: 'Yasna Āθrō', persianFull: 'Jashn Azargan', monthIdx: 8, days: [9], desc: 'Honoring sanctified fire, warmth, and light.' },
+  { name: 'Deygan', avestanFull: 'Yasna Dathušō', persianFull: 'Jashn Deygan', monthIdx: 9, days: [1, 8, 15, 23], desc: "Multiple feasts to the Creator during Dey, centered on the Winter Solstice." },
+  { name: 'Bahmangan', avestanFull: 'Yasna Vaŋheuš Manaŋhō', persianFull: 'Jashn Bahmangan', monthIdx: 10, days: [2], desc: 'Honoring wisdom, good thought, and the protection of animal creation.' },
+  { name: 'Esfandgan', avestanFull: 'Yasna Spentayāi Ārmatōiš', persianFull: 'Jashn Esfandgan', monthIdx: 11, days: [5], desc: 'Celebration of the Earth, devotion, and honors for women and mothers.' },
 ];
 
 /* Local-noon reference for the calendar day (at the observer's clock
@@ -1217,18 +1362,116 @@ function computeZoroastrianDate(lat, lon, now, offsetMinutes) {
 let calMonthIndex = 0; // 0-11 normal months, 12 = Gāthā days
 
 // The 4 fixed cardinal anchors — always Farvardin 1 / Tir 1 / Mihr 1 / Dey 1
-// in this calendar, hemisphere-independent, with their Persian names.
+// in this calendar, hemisphere-independent, with their base Avestan name
+// and its modern Persian counterpart.
 const CARDINALS = [
-  { monthIdx: 0, day: 1, icon: '🌱', label: 'Nowruz — Bahar', sub: 'Spring Equinox' },
-  { monthIdx: 3, day: 1, icon: '☀️', label: 'Tir 1 — Tabestan', sub: 'Summer Solstice' },
-  { monthIdx: 6, day: 1, icon: '🍂', label: 'Mihr 1 — Pāiz (Mehregān)', sub: 'Autumn Equinox' },
-  { monthIdx: 9, day: 1, icon: '❄️', label: 'Dey 1 — Zemestan (Yaldā)', sub: 'Winter Solstice' },
+  { monthIdx: 0, day: 1, icon: '🌱', avestan: 'Nava Raočå', persian: 'Nowruz', sub: 'Spring Equinox' },
+  { monthIdx: 3, day: 1, icon: '☀️', avestan: 'Yasna Tištryahe', persian: 'Tirgan', sub: 'Summer Solstice' },
+  { monthIdx: 6, day: 1, icon: '🍂', avestan: 'Yasna Mithrahe', persian: 'Mehregan', sub: 'Autumn Equinox' },
+  { monthIdx: 9, day: 1, icon: '❄️', avestan: 'Maidyāriya', persian: 'Shabe Chelleh', sub: 'Winter Solstice' },
 ];
 
 function fmtMonthDay(date, offsetMinutes) {
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const shifted = new Date(date.getTime() + offsetMinutes * 60000);
-  return { mon: MON[shifted.getUTCMonth()], day: shifted.getUTCDate() };
+  return { mon: MON[shifted.getUTCMonth()], day: shifted.getUTCDate(), year: shifted.getUTCFullYear() };
+}
+
+/* ============================================================
+   MODERN PERSIAN (SOLAR HIJRI / JALALI) CIVIL CALENDAR
+   Standard Gregorian <-> Jalali conversion (Borkowski algorithm,
+   the same math behind widely-used libraries like jalaali-js).
+   This is the everyday Iranian/Afghan civil calendar — a
+   different, astronomically-fixed system from this app's
+   Zoroastrian religious calendar above, even though they share
+   month names.
+   ============================================================ */
+function jDiv(a, b) { return Math.trunc(a / b); }
+function jMod(a, b) { return a - Math.trunc(a / b) * b; }
+
+function jG2d(gy, gm, gd) {
+  let d = jDiv((gy + jDiv(gm - 8, 6) + 100100) * 1461, 4) +
+    jDiv(153 * jMod(gm + 9, 12) + 2, 5) + gd - 34840408;
+  d = d - jDiv(jDiv(gy + 100100 + jDiv(gm - 8, 6), 100) * 3, 4) + 752;
+  return d;
+}
+
+function jD2g(jdn) {
+  let j = 4 * jdn + 139361631;
+  j = j + jDiv(jDiv(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
+  const i = jDiv(jMod(j, 1461), 4) * 5 + 308;
+  const gd = jDiv(jMod(i, 153), 5) + 1;
+  const gm = jMod(jDiv(i, 153), 12) + 1;
+  const gy = jDiv(j, 1461) - 100100 + jDiv(8 - gm, 6);
+  return { gy, gm, gd };
+}
+
+function jalCal(jy) {
+  const breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210,
+    1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178];
+  const gy = jy + 621;
+  let leapJ = -14, jp = breaks[0], jm, jump = 0, n;
+  for (let i = 1; i < breaks.length; i++) {
+    jm = breaks[i];
+    jump = jm - jp;
+    if (jy < jm) break;
+    leapJ = leapJ + jDiv(jump, 33) * 8 + jDiv(jMod(jump, 33), 4);
+    jp = jm;
+  }
+  n = jy - jp;
+  leapJ = leapJ + jDiv(n, 33) * 8 + jDiv(jMod(n, 33) + 3, 4);
+  if (jMod(jump, 33) === 4 && jump - n === 4) leapJ += 1;
+  const leapG = jDiv(gy, 4) - jDiv((jDiv(gy, 100) + 1) * 3, 4) - 150;
+  const march = 20 + leapJ - leapG;
+  if (jump - n < 6) n = n - jump + jDiv(jump + 4, 33) * 33;
+  let leap = jMod(jMod(n + 1, 33) - 1, 4);
+  if (leap === -1) leap = 4;
+  return { leap, gy, march };
+}
+
+function jD2j(jdn) {
+  const gy = jD2g(jdn).gy;
+  let jy = gy - 621;
+  const r = jalCal(jy);
+  const jdn1f = jG2d(gy, 3, r.march);
+  let k = jdn - jdn1f, jm, jd;
+  if (k >= 0) {
+    if (k <= 185) {
+      jm = 1 + jDiv(k, 31);
+      jd = jMod(k, 31) + 1;
+      return { jy, jm, jd };
+    }
+    k -= 186;
+  } else {
+    jy -= 1;
+    k += 179;
+    if (r.leap === 1) k += 1;
+  }
+  jm = 7 + jDiv(k, 30);
+  jd = jMod(k, 30) + 1;
+  return { jy, jm, jd };
+}
+
+/* Gregorian calendar-day (in the observer's local offset) -> Jalali
+   {jy, jm, jd}. Ignores time-of-day, matching how civil calendar
+   dates are normally quoted. */
+function gregorianToJalali(date, offsetMinutes) {
+  const shifted = new Date(date.getTime() + offsetMinutes * 60000);
+  const gy = shifted.getUTCFullYear(), gm = shifted.getUTCMonth() + 1, gd = shifted.getUTCDate();
+  return jD2j(jG2d(gy, gm, gd));
+}
+
+const PERSIAN_CIVIL_MONTHS = ['Farvardin', 'Ordibehesht', 'Khordad', 'Tir', 'Mordad', 'Shahrivar',
+  'Mehr', 'Aban', 'Azar', 'Dey', 'Bahman', 'Esfand'];
+
+/* Same sunrise-to-sunrise span as fmtGregorianRange, but rendered in the
+   modern Persian (Solar Hijri) civil calendar. */
+function fmtPersianRange(startSunrise, endSunrise, offsetMinutes) {
+  if (isNaN(startSunrise) || isNaN(endSunrise)) return '';
+  const s = gregorianToJalali(startSunrise, offsetMinutes);
+  const e = gregorianToJalali(endSunrise, offsetMinutes);
+  const sMon = PERSIAN_CIVIL_MONTHS[s.jm - 1], eMon = PERSIAN_CIVIL_MONTHS[e.jm - 1];
+  return sMon === eMon ? `${sMon} ${s.jd}-${e.jd}, ${s.jy}` : `${sMon} ${s.jd} - ${eMon} ${e.jd}, ${e.jy}`;
 }
 
 /* Each Zoroastrian day runs sunrise-to-sunrise, so it always straddles two
@@ -1238,7 +1481,8 @@ function fmtGregorianRange(startSunrise, endSunrise, offsetMinutes) {
   if (isNaN(startSunrise) || isNaN(endSunrise)) return '';
   const s = fmtMonthDay(startSunrise, offsetMinutes);
   const e = fmtMonthDay(endSunrise, offsetMinutes);
-  return s.mon === e.mon ? `${s.mon} ${s.day}-${e.day}` : `${s.mon} ${s.day} - ${e.mon} ${e.day}`;
+  if (s.year !== e.year) return `${s.mon} ${s.day}, ${s.year} - ${e.mon} ${e.day}, ${e.year}`;
+  return s.mon === e.mon ? `${s.mon} ${s.day}-${e.day}, ${s.year}` : `${s.mon} ${s.day} - ${e.mon} ${e.day}, ${s.year}`;
 }
 
 function renderCalendar() {
@@ -1285,10 +1529,12 @@ function renderCalendar() {
     for (let d = 1; d <= 5; d++) {
       const isToday = todayIsGatha && todayZ.gathaDay === d;
       const gregLabel = fmtGregorianRange(sunrises[d - 1], sunrises[d], offsetMinutes);
+      const persLabel = fmtPersianRange(sunrises[d - 1], sunrises[d], offsetMinutes);
       cells += `<div class="cal-cell${isToday ? ' today' : ''}">
         <div class="d">${d}</div>
         <div class="n">Gāthā ${d}</div>
         ${gregLabel ? `<div class="greg">${gregLabel}</div>` : ''}
+        ${persLabel ? `<div class="pers">${persLabel}</div>` : ''}
       </div>`;
     }
     grid.innerHTML = cells;
@@ -1296,7 +1542,7 @@ function renderCalendar() {
   }
 
   const monthName = MONTH_NAMES[calMonthIndex];
-  title.textContent = `${monthName} (Month ${calMonthIndex + 1} of 12)`;
+  title.textContent = `${AVESTAN_MONTH_NAMES[calMonthIndex]} (${monthName}) — Month ${calMonthIndex + 1} of 12`;
   const jashnDays = JASHNS.filter(j => j.monthIdx === calMonthIndex).flatMap(j => j.days.map(d => ({ day: d, jashn: j })));
   const gahambarDays = GAHAMBARS.filter(gb => gb.monthIdx === calMonthIndex);
   const cardinalDays = CARDINALS.filter(c => c.monthIdx === calMonthIndex);
@@ -1312,19 +1558,22 @@ function renderCalendar() {
     const gahambarHit = gahambarDays.find(gb => gb.day === d);
     const cardinalHit = cardinalDays.find(c => c.day === d);
     const gregLabel = fmtGregorianRange(sunrises[d - 1], sunrises[d], offsetMinutes);
+    const persLabel = fmtPersianRange(sunrises[d - 1], sunrises[d], offsetMinutes);
     const classes = ['cal-cell'];
     if (isToday) classes.push('today');
     else if (cardinalHit) classes.push('cardinal-day');
     else if (jashnHit) classes.push('jashn-day');
     else if (gahambarHit) classes.push('gahambar-day');
     else classes.push('season-tint', seasonClass);
-    const titleParts = [cardinalHit && `${cardinalHit.label} (${cardinalHit.sub})`, jashnHit && jashnHit.jashn.name, gahambarHit && `${gahambarHit.avestan} (${gahambarHit.persian})`].filter(Boolean);
+    const titleParts = [cardinalHit && `${cardinalHit.avestan} (${cardinalHit.persian}) — ${cardinalHit.sub}`, jashnHit && `${jashnHit.jashn.avestanFull} (${jashnHit.jashn.persianFull})`, gahambarHit && `${gahambarHit.avestan} (${gahambarHit.persian})`].filter(Boolean);
+    const jashnPartsHit = jashnHit ? jashnParts(jashnHit.jashn) : null;
     cells += `<div class="${classes.join(' ')}" ${titleParts.length ? `title="${titleParts.join(' / ')}"` : ''}>
       <div class="d">${d}${cardinalHit ? ' ' + cardinalHit.icon : ''}${jashnHit ? ' 🎉' : ''}${gahambarHit ? ' 🌾' : ''}</div>
       <div class="n">${AVESTAN_DAY_NAMES[d - 1]} (${DAY_NAMES[d - 1]})</div>
       ${gregLabel ? `<div class="greg">${gregLabel}</div>` : ''}
-      ${cardinalHit ? `<div class="c">${cardinalHit.label} — ${cardinalHit.sub}</div>` : ''}
-      ${jashnHit ? `<div class="j">${jashnHit.jashn.name}</div>` : ''}
+      ${persLabel ? `<div class="pers">${persLabel}</div>` : ''}
+      ${cardinalHit ? `<div class="c">${cardinalHit.avestan} (${cardinalHit.persian})<br>${cardinalHit.sub}</div>` : ''}
+      ${jashnHit ? `<div class="j"><span class="j-yasna">${jashnPartsHit.yasnaWord}</span><br><span class="j-avestan">${jashnPartsHit.avestanWord}</span><br>(${jashnHit.jashn.persianFull})</div>` : ''}
       ${gahambarHit ? `<div class="g">${gahambarHit.avestan} (${gahambarHit.persian})</div>` : ''}
     </div>`;
   }
@@ -1339,13 +1588,14 @@ document.getElementById('calNextBtn').addEventListener('click', () => {
   calMonthIndex = (calMonthIndex + 1) % 13;
   renderCalendar();
 });
-document.getElementById('calTodayBtn').addEventListener('click', () => {
+function jumpCalendarToToday() {
   const { lat, lon, offsetMinutes } = getState();
   if (isNaN(lat) || isNaN(lon)) return;
   const todayZ = computeZoroastrianDate(lat, lon, new Date(), offsetMinutes);
   calMonthIndex = todayZ.isGatha ? 12 : todayZ.monthIdx;
   renderCalendar();
-});
+}
+document.getElementById('calTodayBtn').addEventListener('click', jumpCalendarToToday);
 
 const GAHAMBARS = [
   { avestan: 'Maidyō-zarmya', persian: 'Miyān Bahār', meaning: 'Mid-Spring', lambda: 40, monthIdx: 1, day: 11, note: 'Ordibehesht 11' },
@@ -1447,11 +1697,23 @@ function computeSolarDay(lat, lon, now, offsetMinutes) {
       else { polarGahKey = 'rapithwin'; windowStart = sunToday.solarNoon; windowEnd = sunTomorrow.nadir; }
     }
 
-    // Noon-to-noon cycle for the "Full Solar Day" progress bar — this
-    // never depended on sunrise/sunset, so it works here too.
+    // Noon-to-noon cycle for the "Full Solar Day" progress bar in the
+    // midnight-sun state, where Hāvana/Rapiθvina still split the day and
+    // a separate whole-day anchor is useful. During Polar Night, Ušahina
+    // already IS the whole day (one continuous nadir-to-nadir Gāh), so the
+    // "Full Solar Day" bar reuses that exact same window instead of its
+    // own noon-to-noon one — otherwise the two progress percentages would
+    // silently disagree with no on-screen explanation, which reads as a
+    // bug rather than a real distinction.
     let noonCycleStart, noonCycleEnd;
-    if (now < sunToday.solarNoon) { noonCycleStart = sunYesterday.solarNoon; noonCycleEnd = sunToday.solarNoon; }
-    else { noonCycleStart = sunToday.solarNoon; noonCycleEnd = sunTomorrow.solarNoon; }
+    if (polarState === 'polar-night') {
+      noonCycleStart = windowStart;
+      noonCycleEnd = windowEnd;
+    } else if (now < sunToday.solarNoon) {
+      noonCycleStart = sunYesterday.solarNoon; noonCycleEnd = sunToday.solarNoon;
+    } else {
+      noonCycleStart = sunToday.solarNoon; noonCycleEnd = sunTomorrow.solarNoon;
+    }
 
     const trueSolarDayLength = sunTomorrow.solarNoon - sunToday.solarNoon;
     return {
@@ -1595,9 +1857,13 @@ function tick() {
     document.getElementById('gahRemaining').textContent = fmtDuration(sd.windowEnd - now);
     document.getElementById('gahRemainingPct').textContent = `${(100 - gahPct).toFixed(1)}%`;
 
-    // Full Solar Day -> Full Solar Day (Noon -> Noon) here, since sunrise
-    // never happens; this always works, so it gets a real bar too.
-    document.getElementById('dayBarTitle').textContent = 'Full Solar Day (Noon → Noon)';
+    // Full Solar Day title: during Polar Night this now mirrors the same
+    // nadir-to-nadir window as Ušahina itself (see noonCycleStart/End
+    // above), so it's titled to match; Midnight Sun still uses its own
+    // distinct Noon -> Noon window since the Gāh splits across the day.
+    document.getElementById('dayBarTitle').textContent = sd.polarState === 'polar-night'
+      ? 'Full Solar Day (Midnight → Midnight)'
+      : 'Full Solar Day (Noon → Noon)';
     const dayPassedMs = now - sd.noonCycleStart;
     const dayDurMs = sd.noonCycleEnd - sd.noonCycleStart;
     const dayPct = Math.min(100, Math.max(0, (dayPassedMs / dayDurMs) * 100));
@@ -1624,11 +1890,12 @@ function tick() {
     if (sd.polarState === 'polar-night') {
       const shabGah = getGahDefs(true).find(g => g.key === 'ushahin');
       const share = ((sd.windowEnd - sd.windowStart) / sd.trueSolarDayLength) * 100;
-      document.getElementById('gahCards').innerHTML = `<div class="stat-card" style="background: ${shabGah.color};">
-        <strong>${shabGah.icon} ${shabGah.avestan}</strong> (${shabGah.persian})
-        Start: ${fmtWallTime(sd.windowStart, offsetMinutes, false)}<br>
-        Duration: ${fmtDuration(sd.windowEnd - sd.windowStart)}<br>
-        Share: ${share.toFixed(2)}%
+      document.getElementById('gahCards').innerHTML = `<div class="stat-card gah-card centered" style="background: ${shabGah.color};">
+        <div class="gah-card-head"><span class="gah-icon">${shabGah.icon}</span><span class="gah-name">${shabGah.avestan}</span></div>
+        <div class="gah-card-sub">(${shabGah.persian})</div>
+        <div class="gah-card-row">Start: ${fmtWallTime(sd.windowStart, offsetMinutes, false)}</div>
+        <div class="gah-card-row">Duration: ${fmtDuration(sd.windowEnd - sd.windowStart)}</div>
+        <div class="gah-card-row">Share: ${share.toFixed(2)}%</div>
       </div>`;
     } else {
       const havanGah = getGahDefs(true).find(g => g.key === 'havan');
@@ -1638,17 +1905,19 @@ function tick() {
       const havanShare = ((havanEnd - havanStart) / sd.trueSolarDayLength) * 100;
       const rapithwinShare = ((rapithwinEnd - rapithwinStart) / sd.trueSolarDayLength) * 100;
       document.getElementById('gahCards').innerHTML = `
-        <div class="stat-card" style="background: ${havanGah.color};">
-          <strong>${havanGah.icon} ${havanGah.avestan}</strong> (${havanGah.persian})
-          Start: ${fmtWallTime(havanStart, offsetMinutes, false)}<br>
-          Duration: ${fmtDuration(havanEnd - havanStart)}<br>
-          Share: ${havanShare.toFixed(2)}%
+        <div class="stat-card gah-card" style="background: ${havanGah.color};">
+          <div class="gah-card-head"><span class="gah-icon">${havanGah.icon}</span><span class="gah-name">${havanGah.avestan}</span></div>
+          <div class="gah-card-sub">(${havanGah.persian})</div>
+          <div class="gah-card-row">Start: ${fmtWallTime(havanStart, offsetMinutes, false)}</div>
+          <div class="gah-card-row">Duration: ${fmtDuration(havanEnd - havanStart)}</div>
+          <div class="gah-card-row">Share: ${havanShare.toFixed(2)}%</div>
         </div>
-        <div class="stat-card" style="background: ${rapithwinGah.color};">
-          <strong>${rapithwinGah.icon} ${rapithwinGah.avestan}</strong> (${rapithwinGah.persian})
-          Start: ${fmtWallTime(rapithwinStart, offsetMinutes, false)}<br>
-          Duration: ${fmtDuration(rapithwinEnd - rapithwinStart)} (extends to next Solar Midnight)<br>
-          Share: ${rapithwinShare.toFixed(2)}%
+        <div class="stat-card gah-card" style="background: ${rapithwinGah.color};">
+          <div class="gah-card-head"><span class="gah-icon">${rapithwinGah.icon}</span><span class="gah-name">${rapithwinGah.avestan}</span></div>
+          <div class="gah-card-sub">(${rapithwinGah.persian})</div>
+          <div class="gah-card-row">Start: ${fmtWallTime(rapithwinStart, offsetMinutes, false)}</div>
+          <div class="gah-card-note">Duration: ${fmtDuration(rapithwinEnd - rapithwinStart)} (extends to next Solar Midnight)</div>
+          <div class="gah-card-row">Share: ${rapithwinShare.toFixed(2)}%</div>
         </div>`;
     }
 
@@ -1755,18 +2024,21 @@ function tick() {
     // Gah sector cards
     document.getElementById('gahCards').innerHTML = gahDefs.map(g => {
       if (g.dormant) {
-        return `<div class="stat-card dormant" style="background: ${g.color};">
-          <strong>${g.icon} ${g.avestan}</strong> (${g.persian})
-          Dormant this winter — Hāvana (Bāmdād) extends through this window.
+        return `<div class="stat-card gah-card dormant" style="background: ${g.color};">
+          <div class="gah-card-head"><span class="gah-icon">${g.icon}</span><span class="gah-name">${g.avestan}</span></div>
+          <div class="gah-card-sub">(${g.persian})</div>
+          <div class="gah-card-note">Dormant this winter — Hāvana (Bāmdād) extends through this window.</div>
         </div>`;
       }
       const s = degToTime(g.start), e = degToTime(g.end);
       const share = ((e - s) / solarDayLength) * 100;
-      return `<div class="stat-card" style="background: ${g.color};">
-        <strong>${g.icon} ${g.avestan}</strong> (${g.persian})
-        Start: ${fmtWallTime(s, offsetMinutes, false)}<br>
-        Duration: ${fmtDuration(e - s)}<br>
-        Share: ${share.toFixed(2)}%
+      const lonelyClass = g.key === 'ushahin' ? ' centered' : '';
+      return `<div class="stat-card gah-card${lonelyClass}" style="background: ${g.color};">
+        <div class="gah-card-head"><span class="gah-icon">${g.icon}</span><span class="gah-name">${g.avestan}</span></div>
+        <div class="gah-card-sub">(${g.persian})</div>
+        <div class="gah-card-row">Start: ${fmtWallTime(s, offsetMinutes, false)}</div>
+        <div class="gah-card-row">Duration: ${fmtDuration(e - s)}</div>
+        <div class="gah-card-row">Share: ${share.toFixed(2)}%</div>
       </div>`;
     }).join('');
     document.getElementById('prevNightStart').textContent = fmtWallTime(prevNightStart, offsetMinutes, false);
@@ -1780,13 +2052,23 @@ function tick() {
   /* ---------- Zoroastrian Calendar Date (12x30 + Gāthā days) ---------- */
   const zd = computeZoroastrianDate(lat, lon, now, offsetMinutes);
   const jashnBannerEl = document.getElementById('jashnBanner');
+  const nowruzDayCount = zd.daysSinceNowruz;
+  document.getElementById('daysSinceNowruz').textContent = `${nowruzDayCount} day${nowruzDayCount === 1 ? '' : 's'} passed since Nowruz`;
   if (zd.isGatha) {
     document.getElementById('zDateName').textContent = `Gāthā Day ${zd.gathaDay} of 5`;
     jashnBannerEl.innerHTML = '';
   } else {
-    document.getElementById('zDateName').textContent = `${zd.monthName} ${zd.dayNumber} — Rōz ${AVESTAN_DAY_NAMES[zd.dayNumber - 1]} (${zd.dayName})`;
+    document.getElementById('zDateName').textContent = `${AVESTAN_MONTH_NAMES[zd.monthIdx]} (${zd.monthName}) ${zd.dayNumber} — Rōz ${AVESTAN_DAY_NAMES[zd.dayNumber - 1]} (${zd.dayName})`;
     jashnBannerEl.innerHTML = zd.activeJashn
-      ? `<div class="banner jashn">🎉 <strong>${zd.activeJashn.name}</strong><br>${zd.activeJashn.desc}</div>`
+      ? (() => {
+          const { yasnaWord, avestanWord } = jashnParts(zd.activeJashn);
+          return `<div class="banner jashn">🎉
+            <div class="jashn-yasna">${yasnaWord}</div>
+            <div class="jashn-avestan">${avestanWord}</div>
+            <div class="jashn-persian">(${zd.activeJashn.persianFull})</div>
+            <div class="jashn-desc">${zd.activeJashn.desc}</div>
+          </div>`;
+        })()
       : '';
   }
   const jashnSeasonColors = ['var(--gold-light)', 'var(--gold-light)', 'var(--gold-light)',
@@ -1796,9 +2078,12 @@ function tick() {
   document.getElementById('jashnTable').innerHTML = JASHNS.map(j => {
     const isToday = !zd.isGatha && zd.activeJashn === j;
     const dayLabel = j.days.length > 1 ? j.days.join(', ') : j.days[0];
-    return `<div class="stat-card compact" style="background: ${isToday ? 'var(--gold-deep)' : jashnSeasonColors[j.monthIdx]};">
-      <strong>${j.name}</strong>
-      ${MONTH_NAMES[j.monthIdx]} ${dayLabel}
+    const { yasnaWord, avestanWord } = jashnParts(j);
+    return `<div class="stat-card compact jashn-card" style="background: ${isToday ? 'var(--gold-deep)' : jashnSeasonColors[j.monthIdx]};">
+      <div class="jashn-yasna">${yasnaWord}</div>
+      <div class="jashn-avestan">${avestanWord}</div>
+      <div class="jashn-persian">(${j.persianFull})</div>
+      <div class="jashn-date">${MONTH_NAMES[j.monthIdx]} ${dayLabel}</div>
     </div>`;
   }).join('');
 
@@ -1810,7 +2095,7 @@ function tick() {
   const seasonDaysRemaining = Math.max(0, seasonDaysTotal - seasonDaysPassed);
   const eventType = (se.currentEvent.name === 'Spring' || se.currentEvent.name === 'Autumn') ? 'Equinox' : 'Solstice';
 
-  document.getElementById('currentSeasonName').textContent = SEASON_PERSIAN_NAMES[se.currentEvent.name] || se.currentEvent.name;
+  document.getElementById('currentSeasonName').textContent = `${SEASON_AVESTAN_NAMES[se.currentEvent.name] || ''} (${SEASON_PERSIAN_NAMES[se.currentEvent.name] || se.currentEvent.name})`;
   document.getElementById('currentSeasonEventType').textContent = eventType;
   document.getElementById('seasonBar').style.width = `${seasonPct.toFixed(2)}%`;
   document.getElementById('currentSeasonDayCount').textContent = `${seasonDaysPassed} / ${seasonDaysTotal} days`;
@@ -1834,7 +2119,10 @@ function tick() {
   const yearDaysPassedF = (now - yearNowruz) / 86400000;
   const yearDaysTotalF = (yearNextNowruz - yearNowruz) / 86400000;
   const yearPct = Math.min(100, Math.max(0, (yearDaysPassedF / yearDaysTotalF) * 100));
-  const yearDaysPassed = Math.floor(yearDaysPassedF);
+  // Use the same precise, sunrise-walked day count as the Today section's
+  // "days passed since Nowruz" (zd.daysSinceNowruz) rather than a separate
+  // raw 24h-floor, so the two figures never disagree.
+  const yearDaysPassed = zd.daysSinceNowruz;
   const yearDaysTotal = Math.round(yearDaysTotalF);
   const yearDaysRemaining = Math.max(0, yearDaysTotal - yearDaysPassed);
 
@@ -1907,6 +2195,7 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
     }
     select.selectedIndex = bestIdx;
   }
+  jumpCalendarToToday();
   startLiveUpdates();
 });
 
@@ -1916,6 +2205,7 @@ document.getElementById('location').addEventListener('change', (e) => {
     document.getElementById('latitude').value = opt.dataset.lat;
     document.getElementById('longitude').value = opt.dataset.lon;
   }
+  jumpCalendarToToday();
   startLiveUpdates();
 });
 
