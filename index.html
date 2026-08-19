@@ -33,6 +33,10 @@
       --text-tertiary: #9a9aac;
     }
 
+    * { box-sizing: border-box; }
+
+    html, body { max-width: 100%; overflow-x: hidden; }
+
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -264,8 +268,9 @@
     }
     .cal-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 6px;
+      width: 100%;
     }
     .cal-cell {
       background: var(--bg);
@@ -274,6 +279,8 @@
       padding: 8px 3px 7px;
       text-align: center;
       min-height: 122px;
+      min-width: 0;
+      overflow-wrap: break-word;
     }
     /* Season tint for ordinary (non-highlighted) days — same 4-color
        palette used everywhere else in the app. White text throughout
@@ -293,14 +300,22 @@
     .cal-cell.cardinal-day { box-shadow: inset 0 0 0 2px var(--indigo); background: #f0eefc; }
     .cal-cell .d { font-size: 0.86rem; font-weight: 800; color: var(--text-primary); }
     .cal-cell .n { font-size: 0.6rem; font-weight: 600; color: var(--text-secondary); line-height: 1.2; margin-top: 2px; word-break: break-word; }
-    .cal-cell .greg { font-size: 0.56rem; font-weight: 600; color: var(--text-tertiary); line-height: 1.2; margin-top: 2px; white-space: nowrap; }
-    .cal-cell .pers { font-size: 0.56rem; font-weight: 600; color: var(--text-tertiary); line-height: 1.2; margin-top: 1px; white-space: nowrap; }
+    .cal-cell .greg { font-size: 0.56rem; font-weight: 600; color: var(--text-tertiary); line-height: 1.2; margin-top: 2px; }
+    .cal-cell .pers { font-size: 0.56rem; font-weight: 600; color: var(--text-tertiary); line-height: 1.2; margin-top: 1px; }
     .cal-cell .j { font-size: 0.56rem; font-weight: 700; color: var(--violet); line-height: 1.25; margin-top: 3px; word-break: break-word; }
     .cal-cell .j .j-yasna { text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.8; font-weight: 600; font-size: 0.5rem; }
     .cal-cell .j .j-avestan { font-weight: 800; }
     .cal-cell .g { font-size: 0.56rem; font-weight: 700; color: var(--gold-deep); line-height: 1.2; margin-top: 3px; word-break: break-word; }
     .cal-cell .h { font-size: 0.56rem; font-weight: 700; color: #2e8b57; line-height: 1.2; margin-top: 3px; word-break: break-word; }
     .cal-cell .c { font-size: 0.56rem; font-weight: 700; color: var(--indigo); line-height: 1.2; margin-top: 3px; word-break: break-word; }
+
+    /* Narrow phones: 5 columns get too tight for the longer bilingual
+       month/day text (e.g. "Aug 18-19, 2026") even after wrapping —
+       drop to 3 columns so each cell has enough width to stay readable
+       instead of forcing the grid wider than the viewport. */
+    @media (max-width: 420px) {
+      .cal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
 
     /* ---------- Help / "How This Calendar Works" section ---------- */
     .help-details {
@@ -774,13 +789,13 @@
         <h2>2. The 12×30 Month Structure</h2>
         <p>Twelve months of exactly 30 days each total 360 days. The remaining 5 days needed for a 365-day solar year form the <strong>Gāthā days</strong>, a short block right before the next Nowruz. They don't belong to any of the 12 months.</p>
         <table>
-          <tr><th>#</th><th>Month</th><th>#</th><th>Month</th></tr>
-          <tr><td>1</td><td>Farvardin</td><td>7</td><td>Mihr</td></tr>
-          <tr><td>2</td><td>Ordibehesht</td><td>8</td><td>Aban</td></tr>
-          <tr><td>3</td><td>Khordad</td><td>9</td><td>Adar</td></tr>
-          <tr><td>4</td><td>Tir</td><td>10</td><td>Dey</td></tr>
-          <tr><td>5</td><td>Amordad</td><td>11</td><td>Bahman</td></tr>
-          <tr><td>6</td><td>Shahrevar</td><td>12</td><td>Esfand</td></tr>
+          <tr><th>#</th><th>Month</th><th>English</th><th>#</th><th>Month</th><th>English</th></tr>
+          <tr><td>1</td><td>Farvardin</td><td>Ancestral Souls</td><td>7</td><td>Mihr</td><td>Sun Light</td></tr>
+          <tr><td>2</td><td>Ordibehesht</td><td>Best Truth</td><td>8</td><td>Aban</td><td>Waters</td></tr>
+          <tr><td>3</td><td>Khordad</td><td>Wholeness</td><td>9</td><td>Adar</td><td>Fire</td></tr>
+          <tr><td>4</td><td>Tir</td><td>Rain Star</td><td>10</td><td>Dey</td><td>Maker</td></tr>
+          <tr><td>5</td><td>Amordad</td><td>Immortality</td><td>11</td><td>Bahman</td><td>Good Mind</td></tr>
+          <tr><td>6</td><td>Shahrevar</td><td>Desirable Dominion</td><td>12</td><td>Esfand</td><td>Bounteous Devotion</td></tr>
         </table>
         <p>Each day begins at sunrise, so a calendar day spans two Gregorian dates — the app labels this as a range, e.g. <code>Mar 20-21</code>. The exact range shifts slightly year to year and by location, since it's found by walking sunrise-to-sunrise from the Nowruz anchor rather than by a fixed offset.</p>
         <div class="note">
@@ -803,37 +818,37 @@
         <h2>3. The 30 Day-Names (Rōz)</h2>
         <p>Each day of every month is dedicated to one of the Yazatas, in a fixed 30-name cycle repeating identically in every month.</p>
         <table>
-          <tr><th>#</th><th>Base Avestan Name</th><th>New Persian</th></tr>
-          <tr><td>1</td><td>Ahura Mazda</td><td>Hormazd</td></tr>
-          <tr><td>2</td><td>Vohu Manah</td><td>Bahman</td></tr>
-          <tr><td>3</td><td>Aša Vahišta</td><td>Ordibehesht</td></tr>
-          <tr><td>4</td><td>Xšaθra Vairya</td><td>Shahrevar</td></tr>
-          <tr><td>5</td><td>Spenta Ārmaiti</td><td>Esfand</td></tr>
-          <tr><td>6</td><td>Haurvatāt</td><td>Khordad</td></tr>
-          <tr><td>7</td><td>Ameretāt</td><td>Amordad</td></tr>
-          <tr><td>8</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Adar</td></tr>
-          <tr><td>9</td><td>Ātar</td><td>Azar / Adar</td></tr>
-          <tr><td>10</td><td>Ap</td><td>Aban</td></tr>
-          <tr><td>11</td><td>Hvare-xšaēta</td><td>Khorshed</td></tr>
-          <tr><td>12</td><td>Māh</td><td>Mah</td></tr>
-          <tr><td>13</td><td>Tištrya</td><td>Tir</td></tr>
-          <tr><td>14</td><td>Geuš Urvan</td><td>Gosh</td></tr>
-          <tr><td>15</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Mihr</td></tr>
-          <tr><td>16</td><td>Mithra</td><td>Mihr / Mehr</td></tr>
-          <tr><td>17</td><td>Sraōša</td><td>Soroush</td></tr>
-          <tr><td>18</td><td>Rašnu</td><td>Rashn</td></tr>
-          <tr><td>19</td><td>Fravaši</td><td>Farvardin</td></tr>
-          <tr><td>20</td><td>Vərəθraγna</td><td>Bahram</td></tr>
-          <tr><td>21</td><td>Rāman</td><td>Ram</td></tr>
-          <tr><td>22</td><td>Vāta</td><td>Bad / Vad</td></tr>
-          <tr><td>23</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Din</td></tr>
-          <tr><td>24</td><td>Daēnā</td><td>Din</td></tr>
-          <tr><td>25</td><td>Aši</td><td>Ard / Ashi</td></tr>
-          <tr><td>26</td><td>Arštāt</td><td>Ashtad</td></tr>
-          <tr><td>27</td><td>Asman</td><td>Asman</td></tr>
-          <tr><td>28</td><td>Zam</td><td>Zamyad</td></tr>
-          <tr><td>29</td><td>Mąθra Spenta</td><td>Mahraspand</td></tr>
-          <tr><td>30</td><td>Anaghra Raōčah</td><td>Aneran</td></tr>
+          <tr><th>#</th><th>Base Avestan Name</th><th>New Persian</th><th>English</th></tr>
+          <tr><td>1</td><td>Ahura Mazda</td><td>Hormazd</td><td>Lord Wisdom</td></tr>
+          <tr><td>2</td><td>Vohu Manah</td><td>Bahman</td><td>Good Mind</td></tr>
+          <tr><td>3</td><td>Aša Vahišta</td><td>Ordibehesht</td><td>Best Truth</td></tr>
+          <tr><td>4</td><td>Xšaθra Vairya</td><td>Shahrevar</td><td>Desirable Dominion</td></tr>
+          <tr><td>5</td><td>Spenta Ārmaiti</td><td>Esfand</td><td>Bounteous Devotion</td></tr>
+          <tr><td>6</td><td>Haurvatāt</td><td>Khordad</td><td>Wholeness</td></tr>
+          <tr><td>7</td><td>Ameretāt</td><td>Amordad</td><td>Immortality</td></tr>
+          <tr><td>8</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Adar</td><td>Day Before Fire</td></tr>
+          <tr><td>9</td><td>Ātar</td><td>Azar / Adar</td><td>Fire</td></tr>
+          <tr><td>10</td><td>Ap</td><td>Aban</td><td>Waters</td></tr>
+          <tr><td>11</td><td>Hvare-xšaēta</td><td>Khorshed</td><td>Radiant Sun</td></tr>
+          <tr><td>12</td><td>Māh</td><td>Mah</td><td>Moon</td></tr>
+          <tr><td>13</td><td>Tištrya</td><td>Tir</td><td>Rain Star</td></tr>
+          <tr><td>14</td><td>Geuš Urvan</td><td>Gosh</td><td>Soul Bull</td></tr>
+          <tr><td>15</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Mihr</td><td>Day Before Sun Light</td></tr>
+          <tr><td>16</td><td>Mithra</td><td>Mihr / Mehr</td><td>Sun Light</td></tr>
+          <tr><td>17</td><td>Sraōša</td><td>Soroush</td><td>Obedience</td></tr>
+          <tr><td>18</td><td>Rašnu</td><td>Rashn</td><td>Justice</td></tr>
+          <tr><td>19</td><td>Fravaši</td><td>Farvardin</td><td>Ancestral Souls</td></tr>
+          <tr><td>20</td><td>Vərəθraγna</td><td>Bahram</td><td>Victory</td></tr>
+          <tr><td>21</td><td>Rāman</td><td>Ram</td><td>Peace</td></tr>
+          <tr><td>22</td><td>Vāta</td><td>Bad / Vad</td><td>Wind</td></tr>
+          <tr><td>23</td><td>Datuš Ahura Mazda</td><td>Dey-ba-Din</td><td>Day Before Conscience</td></tr>
+          <tr><td>24</td><td>Daēnā</td><td>Din</td><td>Conscience</td></tr>
+          <tr><td>25</td><td>Aši</td><td>Ard / Ashi</td><td>Good Reward</td></tr>
+          <tr><td>26</td><td>Arštāt</td><td>Ashtad</td><td>Rectitude</td></tr>
+          <tr><td>27</td><td>Asman</td><td>Asman</td><td>Sky</td></tr>
+          <tr><td>28</td><td>Zam</td><td>Zamyad</td><td>Earth</td></tr>
+          <tr><td>29</td><td>Mąθra Spenta</td><td>Mahraspand</td><td>Holy Word</td></tr>
+          <tr><td>30</td><td>Anaghra Raōčah</td><td>Aneran</td><td>Endless Lights</td></tr>
         </table>
         <p>Days 8, 15, and 23 are all dedicated to Datuš Ahura Mazda ("Creator") and disambiguated in Persian by which later day each precedes: Dey-ba-Adar, Dey-ba-Mihr, Dey-ba-Din.</p>
         <div class="uncertain">
@@ -1269,6 +1284,19 @@ const AVESTAN_DAY_NAMES = ['Ahura Mazda', 'Vohu Manah', 'Aša Vahišta', 'Xšaθ
   'Datuš Ahura Mazda', 'Mithra', 'Sraōša', 'Rašnu', 'Fravaši', 'Vərəθraγna', 'Rāman', 'Vāta',
   'Datuš Ahura Mazda', 'Daēnā', 'Aši', 'Arštāt', 'Asman', 'Zam', 'Mąθra Spenta', 'Anaghra Raōčah'];
 
+/* Word-for-word English translation of each of the 12 month names, same
+   order/index as MONTH_NAMES / AVESTAN_MONTH_NAMES. */
+const MONTH_MEANINGS = ['Ancestral Souls', 'Best Truth', 'Wholeness', 'Rain Star', 'Immortality',
+  'Desirable Dominion', 'Sun Light', 'Waters', 'Fire', 'Maker', 'Good Mind', 'Bounteous Devotion'];
+
+/* Word-for-word English translation of each of the 30 day-names, same
+   order/index as DAY_NAMES / AVESTAN_DAY_NAMES. */
+const DAY_MEANINGS = ['Lord Wisdom', 'Good Mind', 'Best Truth', 'Desirable Dominion', 'Bounteous Devotion',
+  'Wholeness', 'Immortality', 'Day Before Fire', 'Fire', 'Waters', 'Radiant Sun', 'Moon', 'Rain Star',
+  'Soul Bull', 'Day Before Sun Light', 'Sun Light', 'Obedience', 'Justice', 'Ancestral Souls', 'Victory',
+  'Peace', 'Wind', 'Day Before Conscience', 'Conscience', 'Good Reward', 'Rectitude', 'Sky', 'Earth',
+  'Holy Word', 'Endless Lights'];
+
 /* Name-match Jashns: fires whenever the day's name (Rōz) matches the
    month's own dedication. monthIdx is 0-based into MONTH_NAMES; days
    are 1-based day numbers within that month. */
@@ -1570,7 +1598,7 @@ function renderCalendar() {
   }
 
   const monthName = MONTH_NAMES[calMonthIndex];
-  title.textContent = `${AVESTAN_MONTH_NAMES[calMonthIndex]} (${monthName}) — Month ${calMonthIndex + 1} of 12`;
+  title.textContent = `${AVESTAN_MONTH_NAMES[calMonthIndex]} (${monthName} — ${MONTH_MEANINGS[calMonthIndex]}) — Month ${calMonthIndex + 1} of 12`;
   const jashnDays = JASHNS.filter(j => j.monthIdx === calMonthIndex).flatMap(j => j.days.map(d => ({ day: d, jashn: j })));
   const gahambarDays = GAHAMBARS.filter(gb => gb.monthIdx === calMonthIndex);
   const cardinalDays = CARDINALS.filter(c => c.monthIdx === calMonthIndex);
@@ -1600,7 +1628,7 @@ function renderCalendar() {
     const jashnPartsHit = jashnHit ? jashnParts(jashnHit.jashn) : null;
     cells += `<div class="${classes.join(' ')}" ${titleParts.length ? `title="${titleParts.join(' / ')}"` : ''}>
       <div class="d">${d}${cardinalHit ? ' ' + cardinalHit.icon : ''}${jashnHit ? ' 🎉' : ''}${gahambarHit ? ' 🌾' : ''}${extraHolidayHit ? ' ' + extraHolidayHit.icon : ''}</div>
-      <div class="n">${AVESTAN_DAY_NAMES[d - 1]} (${DAY_NAMES[d - 1]})</div>
+      <div class="n">${AVESTAN_DAY_NAMES[d - 1]} (${DAY_NAMES[d - 1]} — ${DAY_MEANINGS[d - 1]})</div>
       ${gregLabel ? `<div class="greg">${gregLabel}</div>` : ''}
       ${persLabel ? `<div class="pers">${persLabel}</div>` : ''}
       ${cardinalHit ? `<div class="c">${cardinalHit.avestan} (${cardinalHit.persian})<br>${cardinalHit.sub}</div>` : ''}
@@ -2090,7 +2118,7 @@ function tick() {
     document.getElementById('zDateName').textContent = `Gāthā Day ${zd.gathaDay} of 5`;
     jashnBannerEl.innerHTML = '';
   } else {
-    document.getElementById('zDateName').textContent = `${AVESTAN_MONTH_NAMES[zd.monthIdx]} (${zd.monthName}) ${zd.dayNumber} — Rōz ${AVESTAN_DAY_NAMES[zd.dayNumber - 1]} (${zd.dayName})`;
+    document.getElementById('zDateName').textContent = `${AVESTAN_MONTH_NAMES[zd.monthIdx]} (${zd.monthName} — ${MONTH_MEANINGS[zd.monthIdx]}) ${zd.dayNumber} — Rōz ${AVESTAN_DAY_NAMES[zd.dayNumber - 1]} (${zd.dayName} — ${DAY_MEANINGS[zd.dayNumber - 1]})`;
     jashnBannerEl.innerHTML = zd.activeJashn
       ? (() => {
           const { yasnaWord, avestanWord } = jashnParts(zd.activeJashn);
