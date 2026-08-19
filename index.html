@@ -289,6 +289,7 @@
     .cal-cell.today { box-shadow: inset 0 0 0 2px var(--gold-deep); background: #fff8ec; }
     .cal-cell.jashn-day { box-shadow: inset 0 0 0 2px var(--violet); background: #f4f2fd; }
     .cal-cell.gahambar-day { box-shadow: inset 0 0 0 2px var(--gold-deep); background: #fdf3e4; }
+    .cal-cell.extra-holiday-day { box-shadow: inset 0 0 0 2px #2e8b57; background: #eaf6ee; }
     .cal-cell.cardinal-day { box-shadow: inset 0 0 0 2px var(--indigo); background: #f0eefc; }
     .cal-cell .d { font-size: 0.86rem; font-weight: 800; color: var(--text-primary); }
     .cal-cell .n { font-size: 0.6rem; font-weight: 600; color: var(--text-secondary); line-height: 1.2; margin-top: 2px; word-break: break-word; }
@@ -298,6 +299,7 @@
     .cal-cell .j .j-yasna { text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.8; font-weight: 600; font-size: 0.5rem; }
     .cal-cell .j .j-avestan { font-weight: 800; }
     .cal-cell .g { font-size: 0.56rem; font-weight: 700; color: var(--gold-deep); line-height: 1.2; margin-top: 3px; word-break: break-word; }
+    .cal-cell .h { font-size: 0.56rem; font-weight: 700; color: #2e8b57; line-height: 1.2; margin-top: 3px; word-break: break-word; }
     .cal-cell .c { font-size: 0.56rem; font-weight: 700; color: var(--indigo); line-height: 1.2; margin-top: 3px; word-break: break-word; }
 
     /* ---------- Help / "How This Calendar Works" section ---------- */
@@ -1324,22 +1326,32 @@ function computeZoroastrianDate(lat, lon, now, offsetMinutes) {
   const anchorSunrise = findFirstSunriseAtOrAfter(nowruzInstant, lat, lon);
   const anchorNoon = localCalendarNoon(anchorSunrise || nowruzInstant, offsetMinutes);
 
-  const sunriseAt = (dayOffset) => SunCalc.getTimes(addDays(anchorNoon, dayOffset), lat, lon).sunrise;
+  // Robust day boundary: the real sunrise on days the sun actually rises;
+  // otherwise a fixed local-midnight fallback (that day's local noon minus
+  // 12h). This NEVER returns NaN, unlike raw SunCalc sunrise — which is
+  // essential near the poles, where Midnight Sun or Polar Night can make
+  // sunrise undefined for weeks or months at a stretch. A day-counting walk
+  // built on raw sunrise alone stalls the instant it hits the first NaN
+  // (freezing "days since Nowruz" at whatever day Midnight Sun/Polar Night
+  // began, e.g. day ~31 for Qaanaaq, Greenland — this fallback is what
+  // keeps the count advancing through those stretches instead of stalling).
+  const dayBoundary = (dayOffset) => {
+    const dayNoon = addDays(anchorNoon, dayOffset);
+    const sr = SunCalc.getTimes(dayNoon, lat, lon).sunrise;
+    return (sr instanceof Date && !isNaN(sr)) ? sr : new Date(dayNoon.getTime() - 12 * 3600000);
+  };
 
-  let daysSinceNowruz;
-  if (anchorSunrise === null || isNaN(anchorSunrise)) {
-    // Polar day/night right at the anchor date — sunrise-based reckoning
-    // is undefined here, so fall back to a fixed 24h day count.
-    daysSinceNowruz = Math.floor((now - nowruzInstant) / 86400000);
-  } else {
-    let guess = Math.floor((now - anchorSunrise) / 86400000);
-    let safety = 0;
-    let s = sunriseAt(guess);
-    while ((isNaN(s) || s > now) && safety < 400) { guess--; s = sunriseAt(guess); safety++; }
-    let sNext = sunriseAt(guess + 1);
-    while (!isNaN(sNext) && sNext <= now && safety < 400) { guess++; s = sNext; sNext = sunriseAt(guess + 1); safety++; }
-    daysSinceNowruz = guess;
-  }
+  // Day 0's boundary uses the same fallback (rather than a separate
+  // branch), so even a Nowruz that itself falls during Midnight Sun/Polar
+  // Night still gets a well-defined, consistent starting point.
+  const anchorBoundary = dayBoundary(0);
+  let guess = Math.floor((now - anchorBoundary) / 86400000);
+  let safety = 0;
+  let b = dayBoundary(guess);
+  while (b > now && safety < 400) { guess--; b = dayBoundary(guess); safety++; }
+  let bNext = dayBoundary(guess + 1);
+  while (bNext <= now && safety < 400) { guess++; b = bNext; bNext = dayBoundary(guess + 1); safety++; }
+  const daysSinceNowruz = guess;
 
   if (daysSinceNowruz < 360) {
     const monthIdx = Math.floor(daysSinceNowruz / 30);
@@ -1369,6 +1381,22 @@ const CARDINALS = [
   { monthIdx: 3, day: 1, icon: '☀️', avestan: 'Yasna Tištryahe', persian: 'Tirgan', sub: 'Summer Solstice' },
   { monthIdx: 6, day: 1, icon: '🍂', avestan: 'Yasna Mithrahe', persian: 'Mehregan', sub: 'Autumn Equinox' },
   { monthIdx: 9, day: 1, icon: '❄️', avestan: 'Maidyāriya', persian: 'Shabe Chelleh', sub: 'Winter Solstice' },
+];
+
+// Two later Persian folk holidays (post-Avestan, no distinct liturgical
+// Avestan name of their own) fixed by their offset from Nowruz within
+// this calendar's own 12x30 + 5 Gāthā-day structure. Because that
+// structure is identical every year regardless of hemisphere — only
+// which equinox opens Farvardin 1 changes — these land on the same
+// Farvardin/Bahman day everywhere, so no separate hemisphere handling is
+// needed beyond what already resolves Farvardin 1 itself:
+//  - Sizdah Bedar: the 13th day of the new year, Farvardin 13.
+//  - Sadeh: 50 days before the next Nowruz. Counting back from Farvardin 1
+//    through the 5 Gāthā days, then all of Esfand (30 days), then partway
+//    through Bahman, lands 50 days back on Bahman 16.
+const EXTRA_HOLIDAYS = [
+  { monthIdx: 0, day: 13, icon: '🌿', persian: 'Sizdah Bedar', desc: '13th day of the new year — outdoor nature day, closes the Nowruz holidays.' },
+  { monthIdx: 10, day: 16, icon: '🔥', persian: 'Sadeh', desc: '50 days before Nowruz — midwinter fire festival.' },
 ];
 
 function fmtMonthDay(date, offsetMinutes) {
@@ -1546,6 +1574,7 @@ function renderCalendar() {
   const jashnDays = JASHNS.filter(j => j.monthIdx === calMonthIndex).flatMap(j => j.days.map(d => ({ day: d, jashn: j })));
   const gahambarDays = GAHAMBARS.filter(gb => gb.monthIdx === calMonthIndex);
   const cardinalDays = CARDINALS.filter(c => c.monthIdx === calMonthIndex);
+  const extraHolidayDays = EXTRA_HOLIDAYS.filter(h => h.monthIdx === calMonthIndex);
   const sunrises = sunriseSeries(calMonthIndex * 30, 30);
   const seasonClassByMonth = ['s-spring', 's-spring', 's-spring', 's-summer', 's-summer', 's-summer',
     's-autumn', 's-autumn', 's-autumn', 's-winter', 's-winter', 's-winter'];
@@ -1557,6 +1586,7 @@ function renderCalendar() {
     const jashnHit = jashnDays.find(jd => jd.day === d);
     const gahambarHit = gahambarDays.find(gb => gb.day === d);
     const cardinalHit = cardinalDays.find(c => c.day === d);
+    const extraHolidayHit = extraHolidayDays.find(h => h.day === d);
     const gregLabel = fmtGregorianRange(sunrises[d - 1], sunrises[d], offsetMinutes);
     const persLabel = fmtPersianRange(sunrises[d - 1], sunrises[d], offsetMinutes);
     const classes = ['cal-cell'];
@@ -1564,17 +1594,19 @@ function renderCalendar() {
     else if (cardinalHit) classes.push('cardinal-day');
     else if (jashnHit) classes.push('jashn-day');
     else if (gahambarHit) classes.push('gahambar-day');
+    else if (extraHolidayHit) classes.push('extra-holiday-day');
     else classes.push('season-tint', seasonClass);
-    const titleParts = [cardinalHit && `${cardinalHit.avestan} (${cardinalHit.persian}) — ${cardinalHit.sub}`, jashnHit && `${jashnHit.jashn.avestanFull} (${jashnHit.jashn.persianFull})`, gahambarHit && `${gahambarHit.avestan} (${gahambarHit.persian})`].filter(Boolean);
+    const titleParts = [cardinalHit && `${cardinalHit.avestan} (${cardinalHit.persian}) — ${cardinalHit.sub}`, jashnHit && `${jashnHit.jashn.avestanFull} (${jashnHit.jashn.persianFull})`, gahambarHit && `${gahambarHit.avestan} (${gahambarHit.persian})`, extraHolidayHit && `${extraHolidayHit.persian} — ${extraHolidayHit.desc}`].filter(Boolean);
     const jashnPartsHit = jashnHit ? jashnParts(jashnHit.jashn) : null;
     cells += `<div class="${classes.join(' ')}" ${titleParts.length ? `title="${titleParts.join(' / ')}"` : ''}>
-      <div class="d">${d}${cardinalHit ? ' ' + cardinalHit.icon : ''}${jashnHit ? ' 🎉' : ''}${gahambarHit ? ' 🌾' : ''}</div>
+      <div class="d">${d}${cardinalHit ? ' ' + cardinalHit.icon : ''}${jashnHit ? ' 🎉' : ''}${gahambarHit ? ' 🌾' : ''}${extraHolidayHit ? ' ' + extraHolidayHit.icon : ''}</div>
       <div class="n">${AVESTAN_DAY_NAMES[d - 1]} (${DAY_NAMES[d - 1]})</div>
       ${gregLabel ? `<div class="greg">${gregLabel}</div>` : ''}
       ${persLabel ? `<div class="pers">${persLabel}</div>` : ''}
       ${cardinalHit ? `<div class="c">${cardinalHit.avestan} (${cardinalHit.persian})<br>${cardinalHit.sub}</div>` : ''}
       ${jashnHit ? `<div class="j"><span class="j-yasna">${jashnPartsHit.yasnaWord}</span><br><span class="j-avestan">${jashnPartsHit.avestanWord}</span><br>(${jashnHit.jashn.persianFull})</div>` : ''}
       ${gahambarHit ? `<div class="g">${gahambarHit.avestan} (${gahambarHit.persian})</div>` : ''}
+      ${extraHolidayHit ? `<div class="h">${extraHolidayHit.persian}</div>` : ''}
     </div>`;
   }
   grid.innerHTML = cells;
@@ -1603,7 +1635,7 @@ const GAHAMBARS = [
   { avestan: 'Paiti-ša-hāmya', persian: 'Pāyān Tābestān', meaning: 'End of Summer', lambda: 175, monthIdx: 5, day: 26, note: 'Shahrivar 26' },
   { avestan: 'Aya-θrima', persian: "Miyān Pā'īz", meaning: 'Mid-Autumn', lambda: 205, monthIdx: 6, day: 26, note: 'Mehr 26' },
   { avestan: 'Maidyō-yārya', persian: 'Miyān Zemestān', meaning: 'Mid-Winter', lambda: 280, monthIdx: 9, day: 11, note: 'Dey 11' },
-  { avestan: 'Hama-spas-maidaya', persian: 'Pāyān Sāl', meaning: 'End of Year', lambda: 355, monthIdx: 11, day: 26, note: 'Esfand 26' },
+  { avestan: 'Hama-spas-maidaya', persian: 'Pāyān Sāl - Charshanbe Suri', meaning: 'End of Year', lambda: 355, monthIdx: 11, day: 26, note: 'Esfand 26' },
 ];
 
 /* ============================================================
